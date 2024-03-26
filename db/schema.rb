@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_26_114436) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_26_125122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,9 +50,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_26_114436) do
     t.integer "no_of_guests"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "buyer_id", null: false
+    t.bigint "lister_id"
+    t.index ["buyer_id"], name: "index_bookings_on_buyer_id"
+    t.index ["lister_id"], name: "index_bookings_on_lister_id"
     t.index ["listing_id"], name: "index_bookings_on_listing_id"
-    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -101,7 +103,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_26_114436) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "listings"
-  add_foreign_key "bookings", "users"
+  add_foreign_key "bookings", "users", column: "buyer_id"
+  add_foreign_key "bookings", "users", column: "lister_id"
   add_foreign_key "listings", "categories"
   add_foreign_key "listings", "users"
 end

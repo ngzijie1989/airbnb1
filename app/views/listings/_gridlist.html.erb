@@ -69,7 +69,7 @@
         </div>
         <div class="listing-content">
           <p><%= listing.state %>, <%= listing.country%></p>
-          <p>Listed by <%= User.find(listing.user_id).name %></p>
+          <p>Listed by <strong><%= User.find(listing.user_id).name %></strong></p>
           <p><strong>$<%=listing.price_per_night%></strong> SGD per night</p>
         </div>
       </div>

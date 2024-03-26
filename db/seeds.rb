@@ -27,7 +27,7 @@ cat3 = Category.create!(name: "Service Apartment")
 cat4 = Category.create!(name: "Landed")
 cat5 = Category.create!(name: "Villa")
 
-10.times do
+20.times do
 cat_array = [cat1, cat2, cat3, cat4, cat5]
 user_array = [user1, user2, user3, user4]
 Listing.create!(country: Faker::Address.country, 
@@ -37,7 +37,7 @@ Listing.create!(country: Faker::Address.country,
                 "Discover the perfect blend of comfort and style in our spacious Airbnb apartment. Located in the heart of the city, 
                 this cozy retreat offers modern amenities, breathtaking views, and easy access to top attractions. Unwind in the luxurious
                  living space, savor gourmet meals in the fully-equipped kitchen, and recharge in the serene bedroom. Your ideal urban getaway
-                  awaits!"
+                  awaits!",
                 category_id: cat_array.sample.id, 
                 price_per_night: 150, 
                 location_for_geocode: Faker::Address.full_address, 
@@ -47,5 +47,7 @@ Listing.create!(country: Faker::Address.country,
                 subtitle: Faker::Markdown.emphasis, 
                 user_id: user_array.sample.id)
 end
+
+
 
 puts "seeds done"
