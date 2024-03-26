@@ -6,11 +6,15 @@ class BookingPolicy < ApplicationPolicy
     # end
 
     def resolve
-      scope.where(user: user)
+      scope.where(buyer_id: @user.id)
     end
   end
 
   def new?
-    record.user == user
+    true
+  end
+
+  def create?
+    true
   end
 end

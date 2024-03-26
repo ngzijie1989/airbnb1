@@ -11,6 +11,7 @@ require 'faker'
 #   end
 
 puts "deleting all entries"
+Booking.destroy_all
 Listing.destroy_all
 Category.destroy_all
 User.destroy_all
@@ -27,7 +28,7 @@ cat3 = Category.create!(name: "Service Apartment")
 cat4 = Category.create!(name: "Landed")
 cat5 = Category.create!(name: "Villa")
 
-20.times do
+20.times do |index|
 cat_array = [cat1, cat2, cat3, cat4, cat5]
 user_array = [user1, user2, user3, user4]
 Listing.create!(country: Faker::Address.country, 
@@ -47,7 +48,5 @@ Listing.create!(country: Faker::Address.country,
                 subtitle: Faker::Markdown.emphasis, 
                 user_id: user_array.sample.id)
 end
-
-
 
 puts "seeds done"

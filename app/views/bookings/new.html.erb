@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <h1>You are nearly there...</h1>
+    <p>Please confirm your details and payment before your booking is reserved</p>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+        <%= simple_form_for @booking, url: listing_bookings_path(@listing) do |f| %>
+          <%= f.input :start_date %>
+          <%= f.input :end_date %>
+          <%= f.input :no_of_guests, collection: (1..5) %>
+          <%= f.input :payment, collection: ["Visa", "Mastercard", "Paypal"] %>
+          <%= f.button :submit, class:"btn btn-primary", value: "Reserve" %>
+        <% end %>
+    </div>
+
+    <div class="col-4">
+      <div class="card p-2">
+        <div class="row">
+          <% if @listing.photos.attached? %>
+            <%= cl_image_tag listing.photos[0].key, class:"listing-image" %>
+          <% else %>
+            <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"show-main-image" %>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <p><%= @listing.title %></p>
+          <p>$<%= @listing.price_per_night %> SGD per night</p>
+          <p><%= @listing.country %></p>
+          <p><%= @listing.state %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
