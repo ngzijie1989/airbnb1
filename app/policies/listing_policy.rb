@@ -5,10 +5,10 @@ class ListingPolicy < ApplicationPolicy
     #   scope.all
     # end
     def resolve
-      scope.all
+      scope.includes(photos_attachments: :blob).all
     end
   end
-  
+
   def show?
     true
   end

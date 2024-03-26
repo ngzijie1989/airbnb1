@@ -30,7 +30,22 @@ cat5 = Category.create!(name: "Villa")
 10.times do
 cat_array = [cat1, cat2, cat3, cat4, cat5]
 user_array = [user1, user2, user3, user4]
-Listing.create!(country: Faker::Address.country, state: Faker::Address.city, no_of_rooms: rand(1..5), category_id: cat_array.sample.id, price_per_night: 150, location_for_geocode: Faker::Address.full_address, service_fee_per_night: 30, cleaning_fee_per_night: 15, title: Faker::Quote.famous_last_words, subtitle: Faker::Markdown.emphasis, user_id: user_array.sample.id)
+Listing.create!(country: Faker::Address.country, 
+                state: Faker::Address.city, 
+                no_of_rooms: rand(1..5), 
+                description: 
+                "Discover the perfect blend of comfort and style in our spacious Airbnb apartment. Located in the heart of the city, 
+                this cozy retreat offers modern amenities, breathtaking views, and easy access to top attractions. Unwind in the luxurious
+                 living space, savor gourmet meals in the fully-equipped kitchen, and recharge in the serene bedroom. Your ideal urban getaway
+                  awaits!"
+                category_id: cat_array.sample.id, 
+                price_per_night: 150, 
+                location_for_geocode: Faker::Address.full_address, 
+                service_fee_per_night: 30, 
+                cleaning_fee_per_night: 15, 
+                title: Faker::Quote.famous_last_words, 
+                subtitle: Faker::Markdown.emphasis, 
+                user_id: user_array.sample.id)
 end
 
 puts "seeds done"
