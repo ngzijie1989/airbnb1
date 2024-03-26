@@ -1,4 +1,5 @@
-<% @listings.each do |listing| %>
-<p><%= listing.title %></p>
-<p><%= User.find(listing.user_id).name %></p>
-<% end %>
+
+
+<div class="grid-container">
+  <%= render "gridlist", listings: @listings %>
+</div>

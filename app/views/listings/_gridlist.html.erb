@@ -1,0 +1,77 @@
+<% carousel_id = 0 %>
+  <% listings.each do |listing| %>
+    <%= link_to listing_path(listing), class:"text-decoration-none" do%>
+      <div>
+        <% carousel_id += 1 %>
+
+        <div id="carouselExampleIndicators<%= carousel_id%>" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators<%= carousel_id%>" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators<%= carousel_id%>" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators<%= carousel_id%>" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators<%= carousel_id%>" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators<%= carousel_id%>" data-bs-slide-to="4" aria-label="Slide 5"></button>
+          </div>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <% if listing.photos.attached? %>
+                <%= cl_image_tag listing.photos[0].key, class:"listing-image" %>
+              <% else %>
+                <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+              <% end %>
+            </div>
+
+            <div class="carousel-item">
+              <% if listing.photos.attached? %>
+                <%= cl_image_tag listing.photos[1].key, class:"listing-image" %>
+              <% else %>
+                <%= image_tag "apartment2.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+              <% end %>
+            </div>
+
+            <div class="carousel-item">
+              <% if listing.photos.attached? %>
+                <%= cl_image_tag listing.photos[2].key, class:"listing-image" %>
+              <% else %>
+                <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+              <% end %>
+            </div>
+
+            <div class="carousel-item">
+              <% if listing.photos.attached? %>
+                <%= cl_image_tag listing.photos[3].key, class:"listing-image" %>
+              <% else %>
+                <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+              <% end %>
+            </div>
+
+            <div class="carousel-item">
+              <% if listing.photos.attached? %>
+                <%= cl_image_tag listing.photos[4].key, class:"listing-image" %>
+              <% else %>
+                <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+              <% end %>
+            </div>
+
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<%= carousel_id%>" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators<%= carousel_id%>" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+
+        </div>
+        <div class="listing-content">
+          <p><%= listing.state %>, <%= listing.country%></p>
+          <p>Listed by <%= User.find(listing.user_id).name %></p>
+          <p><strong>$<%=listing.price_per_night%></strong> SGD per night</p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>

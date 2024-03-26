@@ -4,4 +4,10 @@ class ListingsController < ApplicationController
   def index
     @listings = policy_scope(Listing)
   end
+
+  def show
+    @listing = Listing.find(params[:id])
+
+    authorize @listing
+  end
 end
