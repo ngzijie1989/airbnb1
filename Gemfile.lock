@@ -127,6 +127,8 @@ GEM
     error_highlight (0.6.0)
     erubi (1.12.0)
     execjs (2.9.1)
+    faker (3.3.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
     font-awesome-sass (6.5.1)
       sassc (~> 2.0)
@@ -189,6 +191,8 @@ GEM
     public_suffix (5.0.4)
     puma (6.4.2)
       nio4r (~> 2.0)
+    pundit (2.3.1)
+      activesupport (>= 3.0.0)
     racc (1.7.3)
     rack (3.0.10)
     rack-session (2.0.0)
@@ -303,11 +307,13 @@ DEPENDENCIES
   devise
   dotenv-rails
   error_highlight (>= 0.4.0)
+  faker
   font-awesome-sass (~> 6.1)
   importmap-rails
   jbuilder
   pg (~> 1.1)
   puma (>= 5.0)
+  pundit
   rails (~> 7.1.3, >= 7.1.3.2)
   sassc-rails
   selenium-webdriver

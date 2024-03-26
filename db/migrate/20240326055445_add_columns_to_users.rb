@@ -3,6 +3,6 @@ class AddColumnsToUsers < ActiveRecord::Migration[7.1]
     add_column :users, :username, :string
     add_column :users, :bio, :string
     add_column :users, :name, :string
-    add_column :users, :points, :integer
+    add_column :users, :points, :integer, default: 0
   end
 end
