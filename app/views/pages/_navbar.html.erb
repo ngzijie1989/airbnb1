@@ -1,17 +1,22 @@
-<div class="navbar">
-    <div class="logo">
-      <%= image_tag "airbnb_logo_detail.jpg", alt: "Airbnb", width: 150, class: "rounded-5" %>
-    </div>
+<div class="bg-light p-4">
+    <div class="d-flex justify-content-between">
+      <div class="logo">
+        <%= link_to listings_path do %>
+        <%= image_tag "logo-airbnb.png", alt: "Airbnb", width: 150 %>
+        <% end %>
+      </div>
 
-    <div class="dropdown">
-      <button class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Menu
-      </button>
+      <div class="dropdown d-flex align-item-center">
+        <button class="dropdown-toggle btn btn-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Menu
+        </button>
 
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="/bookings">Bookings</a></li>
-        <li><a class="dropdown-item" href="">Another action</a></li>
-        <li><a class="dropdown-item" href="/listings">Home</a></li>
-      </ul>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/bookings">Bookings</a></li>
+          <li><a class="dropdown-item" href="">Another action</a></li>
+          <li><a class="dropdown-item" href="/listings">User</a></li>
+          <li><a class="dropdown-item" href="/listings">Account</a></li>
+        </ul>
+      </div>
     </div>
 </div>

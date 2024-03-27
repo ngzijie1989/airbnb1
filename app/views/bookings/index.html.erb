@@ -1,3 +1,9 @@
 <% @bookings.each do |booking| %>
-<%= booking.aproval_status %>
+  <div class="card">
+    <% @user = User.find(booking.lister_id) %>
+    <% @listing = Listing.find(booking.listing.id) %>
+    <%= booking.aproval_status %>
+    <%= booking.start_date %> - <%= booking.end_date %>
+    <%= @user.username %>
+  </div>
 <% end %>

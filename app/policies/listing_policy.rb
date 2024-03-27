@@ -5,7 +5,7 @@ class ListingPolicy < ApplicationPolicy
     #   scope.all
     # end
     def resolve
-      scope.includes(photos_attachments: :blob).all
+      scope.includes(photos_attachments: :blob).where.not(user: user)
     end
   end
 
