@@ -24,7 +24,7 @@ export default class extends Controller {
   fire(e){
     e.preventDefault();
     const form = e.target.closest("form"); 
-    console.log(form)
+    console.log('hello')
     Swal.fire({
       title: 'Do you wish to continue? Your booking will be confirmed',
       icon: 'warning',

@@ -17,8 +17,9 @@
 
   <body>
     <%= render 'pages/navbar' %>
-    <div class="mt-4">
+    <div class="mt-4 main-content">
       <%= yield %>
+      <%= render "pages/flashes" %>
     </div>
   </body>
 </html>

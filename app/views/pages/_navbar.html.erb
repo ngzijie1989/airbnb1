@@ -1,4 +1,4 @@
-<div class="bg-light p-4">
+<div class="bg-light p-4 navbar-settings">
     <div class="d-flex justify-content-between">
       <div class="logo">
         <%= link_to listings_path do %>
@@ -12,10 +12,14 @@
         </button>
 
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/bookings">Bookings</a></li>
-          <li><a class="dropdown-item" href="">Another action</a></li>
-          <li><a class="dropdown-item" href="/listings">User</a></li>
-          <li><a class="dropdown-item" href="/listings">Account</a></li>
+            <li><a class="dropdown-item" href="/bookings">My Bookings</a></li>
+            <li><a class="dropdown-item" href="">My Listings</a></li>
+            <li><a class="dropdown-item" href="/listings">User Account</a></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete, action:"click->sweetalerts#logout", "sweetalerts-target"=>"logout" }, class:"dropdown-item"%></li>
+          <% else %>
+            <li><%= link_to "Login", new_user_session_path, data: { turbo_method: :get }, class:"dropdown-item"%></li>
+          <% end %>
         </ul>
       </div>
     </div>
