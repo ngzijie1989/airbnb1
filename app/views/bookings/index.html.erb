@@ -55,7 +55,13 @@
 
               <div class="d-flex justify-content-between">
                 <span>Total Price <strong>$<%= @listing.price_per_night*days %></strong> SGD</span>
-                <span><%= @lister.username %></span>
+                <span><%= @lister.username %>
+                  <% if @lister.photo.attached? %>
+                    <%= cl_image_tag @lister.photo.key, height: 300, width: 400, crop: :fill, class:"avatar-small" %>
+                  <% else %>
+                    <%= image_tag "poster boy.jpg", alt: "user", width: 150, class:"avatar-small" %>
+                  <% end %>
+                </span>
               </div>
             </div>
           </div>
@@ -124,7 +130,13 @@
 
                 <div class="d-flex justify-content-between">
                   <span>Total Price <strong>$<%= @listing.price_per_night*days %></strong> SGD</span>
-                  <span><%= @lister.username %></span>
+                  <span><%= @lister.username %>
+                    <% if @lister.photo.attached? %>
+                      <%= cl_image_tag @lister.photo.key, height: 300, width: 400, crop: :fill, class:"avatar" %>
+                    <% else %>
+                      <%= image_tag "poster boy.jpg", alt: "user", width: 150, class:"avatar" %>
+                    <% end %>
+                  </span>
                 </div>
               </div>
             </div>

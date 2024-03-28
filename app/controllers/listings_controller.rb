@@ -3,6 +3,12 @@ class ListingsController < ApplicationController
 
   def index
     @listings = policy_scope(Listing)
+
+    if params[:query].present?
+      @listings = Listing.global_search(params[:query])
+    else 
+      @listings
+    end
   end
 
   def show
