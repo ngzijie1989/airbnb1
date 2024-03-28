@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <h1><%= @listing.title %></h1>
+  <div>
+
+  <% if @listing.photos.attached? %>
+    <div class="d-flex">
+      <div>
+        <%= cl_image_tag listing.photos[0].key, class:"listing-image" %>
+      </div>
+
+      <div class="grid-show">
+        <%= cl_image_tag listing.photos[1].key, class:"listing-image" %>
+        <%= cl_image_tag listing.photos[2].key, class:"listing-image" %>
+        <%= cl_image_tag listing.photos[3].key, class:"listing-image" %>
+        <%= cl_image_tag listing.photos[4].key, class:"listing-image" %>
+      </div>
+    </div>
+  <% else %>
+      <div class="row show-image">
+        <div class="col-6 p-1">
+          <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"show-main-image" %>
+        </div>
+
+        <div class="col-6 grid-show p-1">
+          <%= image_tag "apartment2.jpg", alt: "apartment", width: 150, class:"show-small-image" %>
+          <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"show-small-image" %>
+          <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"show-small-image" %>
+          <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"show-small-image" %>
+        </div>
+      </div>
+  <% end %>
+
+  <div class="row pt-3">
+      <h3><%= @listing.subtitle %></h3>
+      <p><%= @listing.state %>, <%= @listing.country %></p>
+      <p><%= @listing.no_of_rooms %> rooms</p>
+      <p><%= @listing.description %> rooms</p>
+
+      <%= link_to "Back", booking_path(@booking) %>
+  </div>
+</div>

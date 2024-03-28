@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions' }
+
   root to: "listings#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -16,5 +17,8 @@ Rails.application.routes.draw do
 
   resources :bookings, only: %i[index show] do
     get "/listings/:id", to: "listings#bookedlistingshow", as: "view_listing"
+    get "/sendreminder", to: "bookings#sendreminder", as: "sendreminder"
   end
+
+  get "/account_info", to: "pages#account_info", as: "account_info"
 end

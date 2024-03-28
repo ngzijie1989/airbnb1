@@ -5,22 +5,37 @@
         <%= image_tag "logo-airbnb.png", alt: "Airbnb", width: 150 %>
         <% end %>
       </div>
+      
+      <div class="d-flex">
+        <div class="dropdown d-flex align-item-center me-2">
+          <button class="dropdown-toggle btn btn-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menu
+          </button>
 
-      <div class="dropdown d-flex align-item-center">
-        <button class="dropdown-toggle btn btn-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Menu
-        </button>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/bookings">My Bookings</a></li>
+              <li><a class="dropdown-item" href="">My Listings</a></li>
+            <% if user_signed_in? %>
+              <li><%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete, action:"click->sweetalerts#logout", "sweetalerts-target"=>"logout" }, class:"dropdown-item"%></li>
+            <% else %>
+              <li><%= link_to "Login", new_user_session_path, data: { turbo_method: :get }, class:"dropdown-item"%></li>
+            <% end %>
+          </ul>
+        </div>
 
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/bookings">My Bookings</a></li>
-            <li><a class="dropdown-item" href="">My Listings</a></li>
-            <li><a class="dropdown-item" href="/listings">User Account</a></li>
-          <% if user_signed_in? %>
-            <li><%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete, action:"click->sweetalerts#logout", "sweetalerts-target"=>"logout" }, class:"dropdown-item"%></li>
-          <% else %>
-            <li><%= link_to "Login", new_user_session_path, data: { turbo_method: :get }, class:"dropdown-item"%></li>
+        <div>
+          <%= link_to account_info_path do  %>
+            <% if user_signed_in? %>
+              <% @user = current_user %>
+              <% if @user.photo.attached? %>
+                <%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill, class:"avatar" %>
+              <% else %>
+                <%= image_tag "poster boy.jpg", alt: "user", width: 150, class:"avatar" %>
+              <% end %>
+            <% else %>
+            <% end %>
           <% end %>
-        </ul>
+        </div>
       </div>
     </div>
 </div>

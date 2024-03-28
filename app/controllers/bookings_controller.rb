@@ -34,6 +34,12 @@ class BookingsController < ApplicationController
     authorize @booking
   end
 
+  def sendreminder
+    @booking = Booking.find(params[:booking_id])
+
+    authorize @booking
+  end
+
   private
 
   def booking_params2

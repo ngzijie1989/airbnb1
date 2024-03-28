@@ -1,23 +1,45 @@
 <div class="single-booking-show-main">
   <div class="row mb-3">
-    <h3 ><strong>Status:</strong> <%= @booking.aproval_status.titleize %></h3>
-  <div>
+    <h3 class="booking-status-show" ><strong>Status:</strong> <%= @booking.aproval_status.titleize %></h3>
+  </div>
 
   <div class="row">
-    <div class="col-6">
+    <div class="col-6 d-flex flex-column card p-3">
+      <div class="flex-grow-1">
         <% start_date = @booking.start_date.strftime("%e").gsub(" ", "").to_i.ordinalize + @booking.start_date.strftime(" %B %Y") %>
         <% end_date = @booking.end_date.strftime("%e").gsub(" ", "").to_i.ordinalize + @booking.end_date.strftime(" %B %Y") %>
         <p> Start Date: <%= start_date %> </p>
         <p> End Date: <%= end_date %> </p>
+        <p> No of Guests: <%= @booking.no_of_guests %> </p>
         <% days = (@booking.end_date - @booking.start_date).to_i %>
-
         <div class="d-flex justify-content-between">
-          <span>Total Price <strong>$<%= @listing.price_per_night*days %></strong> SGD</span>
+          <p>Total Price: <strong>$<%= @listing.price_per_night*days %></strong> SGD</p>
         </div>
+      </div>
+
+      <div>
+        <% days_left = (@booking.start_date - Time.now.to_date).to_i %>
+        <p>You are just <%= days_left %> days to your stay in <strong><%= @listing.title %></strong> </p>
+        
+        <% if @booking.aproval_status == "pending" && days_left <= 5  %>
+          <%= link_to "Send Reminder to host to review the status", booking_sendreminder_path(@booking) %>
+        <% end %>
+      </div>
     </div>
 
     <div class="col-6">
-      <%=link_to "View listing", booking_view_listing_path(@booking, @listing) %>
-    <div>
+
+      <% if @listing.photos.attached? %>
+        <%= cl_image_tag listing.photos[0].key, class:"booking-image-show" %>
+      <% else %>
+        <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"booking-image-show" %>
+      <% end %>
+
+      <%=link_to "View listing", booking_view_listing_path(@booking, @listing), class:"btn btn-primary w-100 mt-2" %>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <%= link_to "Back", bookings_path %>
   </div>
 </div>

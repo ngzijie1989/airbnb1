@@ -21,4 +21,8 @@ class BookingPolicy < ApplicationPolicy
   def show?
     record.buyer == user
   end
+
+  def sendreminder?
+    record.buyer == user
+  end
 end
