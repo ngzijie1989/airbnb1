@@ -5,4 +5,5 @@ class PagesController < ApplicationController
   def account_info
     @user = current_user
   end
+
 end

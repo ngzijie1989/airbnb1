@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :listings do
     resources :bookings, only: %i[create new]
+    
+    get "/addfavorites", to: "listings#addfavorites", as: "add_favorites"
   end
 
   resources :bookings, only: %i[index show] do
@@ -21,4 +23,6 @@ Rails.application.routes.draw do
   end
 
   get "/account_info", to: "pages#account_info", as: "account_info"
+  
+  resources :favorites, only: %i[index]
 end

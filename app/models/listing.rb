@@ -3,6 +3,7 @@ class Listing < ApplicationRecord
   belongs_to :category
   has_many_attached :photos
   has_many :bookings
+  has_many :favorites
 
   include PgSearch::Model
   pg_search_scope :global_search,

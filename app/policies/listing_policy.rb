@@ -16,4 +16,8 @@ class ListingPolicy < ApplicationPolicy
   def bookedlistingshow?
     true
   end
+
+  def addfavorites?
+    true
+  end
 end
