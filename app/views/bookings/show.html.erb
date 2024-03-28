@@ -1,0 +1,23 @@
+<div class="single-booking-show-main">
+  <div class="row mb-3">
+    <h3 ><strong>Status:</strong> <%= @booking.aproval_status.titleize %></h3>
+  <div>
+
+  <div class="row">
+    <div class="col-6">
+        <% start_date = @booking.start_date.strftime("%e").gsub(" ", "").to_i.ordinalize + @booking.start_date.strftime(" %B %Y") %>
+        <% end_date = @booking.end_date.strftime("%e").gsub(" ", "").to_i.ordinalize + @booking.end_date.strftime(" %B %Y") %>
+        <p> Start Date: <%= start_date %> </p>
+        <p> End Date: <%= end_date %> </p>
+        <% days = (@booking.end_date - @booking.start_date).to_i %>
+
+        <div class="d-flex justify-content-between">
+          <span>Total Price <strong>$<%= @listing.price_per_night*days %></strong> SGD</span>
+        </div>
+    </div>
+
+    <div class="col-6">
+      <%=link_to "View listing", booking_view_listing_path(@booking, @listing) %>
+    <div>
+  </div>
+</div>

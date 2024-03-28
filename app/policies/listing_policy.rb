@@ -12,4 +12,8 @@ class ListingPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def bookedlistingshow?
+    true
+  end
 end

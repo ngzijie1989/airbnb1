@@ -10,6 +10,13 @@ class BookingsController < ApplicationController
     authorize @booking
   end
 
+  def show
+    @booking = Booking.find(params[:id])
+    @listing = Listing.find(@booking.listing_id)
+
+    authorize @booking
+  end
+
   def create
     @booking = Booking.new(booking_params2)
     @booking.aproval_status = "pending"

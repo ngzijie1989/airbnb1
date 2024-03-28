@@ -1,10 +1,10 @@
 <div class="grid-container">
   <% carousel_id = 0 %>
     <% @bookings.each do |booking| %>
-      <% @user = User.find(booking.lister_id) %>
+      <% @lister = User.find(booking.lister_id) %>
       <% @listing = Listing.find(booking.listing.id) %>
       <%= link_to booking_path(booking), class:"text-decoration-none" do%>
-        <div class="position-relative">
+        <div class="booking-card">
           <% carousel_id += 1 %>
 
           <div id="carouselExampleIndicators<%= carousel_id%>" class="carousel slide">
@@ -19,63 +19,39 @@
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <% if @listing.photos.attached? %>
-                  <%= cl_image_tag @listing.photos[0].key, class:"listing-image" %>
+                  <%= cl_image_tag @listing.photos[0].key, class:"booking-image" %>
                 <% else %>
-                  <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"listing-image" %>
-                <% end %>
-              </div>
-
-              <div class="carousel-item">
-                <% if @listing.photos.attached? %>
-                  <%= cl_image_tag @listing.photos[1].key, class:"listing-image" %>
-                <% else %>
-                  <%= image_tag "apartment2.jpg", alt: "apartment", width: 150, class:"listing-image" %>
-                <% end %>
-              </div>
-
-              <div class="carousel-item">
-                <% if @listing.photos.attached? %>
-                  <%= cl_image_tag @listing.photos[2].key, class:"listing-image" %>
-                <% else %>
-                  <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"listing-image" %>
-                <% end %>
-              </div>
-
-              <div class="carousel-item">
-                <% if @listing.photos.attached? %>
-                  <%= cl_image_tag @listing.photos[3].key, class:"listing-image" %>
-                <% else %>
-                  <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"listing-image" %>
-                <% end %>
-              </div>
-
-              <div class="carousel-item">
-                <% if @listing.photos.attached? %>
-                  <%= cl_image_tag @listing.photos[4].key, class:"listing-image" %>
-                <% else %>
-                  <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+                  <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"booking-image" %>
                 <% end %>
               </div>
 
             </div>
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<%= carousel_id%>" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators<%= carousel_id%>" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-
           </div>
-          <div class="listing-content">
-            <span class="position-absolute"><%= booking.aproval_status %><span>
-            <%= booking.start_date %> - <%= booking.end_date %>
-            <%= @user.username %>
-            <p><%= @listing.state %>, <%= @listing.country%></p>
-            <p><strong>$<%=@listing.price_per_night%></strong> SGD per night</p>
+          <div class="booking-status">
+            <% if booking.aproval_status == 'pending' %>
+              <div class="booking-status-pending">
+                <span><%= booking.aproval_status %><span>
+              </div>
+            <% else booking.aproval_status == 'Approved' %>
+              <div class="booking-status-approved">
+                <span><%= booking.aproval_status %><span>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="booking-details p-3 bg-light">
+            <p><strong>Booking Details</strong></p>
+            <% start_date = booking.start_date.strftime("%e").gsub(" ", "").to_i.ordinalize + booking.start_date.strftime(" %B %Y") %>
+            <% end_date = booking.end_date.strftime("%e").gsub(" ", "").to_i.ordinalize + booking.end_date.strftime(" %B %Y") %>
+            <p> Start Date: <%= start_date %> </p>
+            <p> End Date: <%= end_date %> </p>
+            <% days = (booking.end_date - booking.start_date).to_i %>
+
+            <div class="d-flex justify-content-between">
+              <span>Total Price <strong>$<%= @listing.price_per_night*days %></strong> SGD</span>
+              <span><%= @lister.username %></span>
+            </div>
           </div>
         </div>
       <% end %>

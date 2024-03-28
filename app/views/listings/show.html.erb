@@ -40,7 +40,10 @@
     </div>
 
     <div class="col-4">
-      <%= link_to "Book Now", new_listing_booking_path(@listing), class:"btn btn-primary w-100" %>
+      <div class="card p-3">
+        <p><strong>$<%= @listing.price_per_night %></strong> SGD per night</p>
+        <%= link_to "Book Now", new_listing_booking_path(@listing), class:"btn btn-primary w-100" %>
+      </div>
     </div>
   </div>
 </div>

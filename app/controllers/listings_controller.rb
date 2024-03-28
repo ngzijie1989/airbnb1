@@ -10,4 +10,9 @@ class ListingsController < ApplicationController
     @booking = Booking.new
     authorize @listing
   end
+
+  def bookedlistingshow
+    @listing = Listing.find(params[:id])
+    authorize @listing
+  end
 end
