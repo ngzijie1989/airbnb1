@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_29_031844) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_29_081655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,7 +53,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_29_031844) do
     t.bigint "buyer_id", null: false
     t.bigint "lister_id"
     t.string "payment"
-    t.integer "total_price"
+    t.integer "accom_fee"
+    t.integer "total_fee"
+    t.integer "cleaning_fee"
+    t.integer "days_to_stay"
+    t.integer "service_fee"
     t.index ["buyer_id"], name: "index_bookings_on_buyer_id"
     t.index ["lister_id"], name: "index_bookings_on_lister_id"
     t.index ["listing_id"], name: "index_bookings_on_listing_id"

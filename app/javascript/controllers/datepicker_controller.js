@@ -6,8 +6,18 @@ import Swal from 'sweetalert2';
 export default class extends Controller {
   static targets = [
     "startDate",
-    "endDate"
+    "endDate",
+    "days",
+    "accomFee",
+    "serviceFee",
+    "cleaningFee",
+    "total",
+    "form"
   ];
+
+  static values = {
+    id: Number
+  }
 
   connect() {
     this.startDateChange = flatpickr( this.startDateTarget, { minDate: "today" } );
@@ -23,7 +33,7 @@ export default class extends Controller {
   
   fire(e){
     e.preventDefault();
-    const form = e.target.closest("form"); 
+    // const form = e.target.closest("form"); 
     Swal.fire({
       title: 'Do you wish to continue? Your booking will be confirmed',
       icon: 'warning',
@@ -32,7 +42,30 @@ export default class extends Controller {
       cancelButtonText: "Cancel",
     }).then((result)=>{
       if (result.isConfirmed) {
-        form.submit();}
+        const url = `/listings/${this.idValue}/bookings`
+
+        const formData = new FormData(this.formTarget);
+        
+        formData.append('accomFee', this.accomFeeTarget.innerHTML);
+        formData.append('serviceFee', this.serviceFeeTarget.innerHTML);
+        formData.append('cleaningFee', this.cleaningFeeTarget.innerHTML);
+        formData.append('total', this.totalTarget.innerHTML);
+        formData.append('days', this.daysTarget.innerHTML);
+
+        fetch(url, 
+          {method: "POST",
+          headers: { 
+            "Accept": "application/json",
+            "X-CSRF-Token": this.#getMetaValue("csrf-token") },
+          body: formData
+           })
+           .then(response => response.json())
+           .then((data)=>{
+              console.log(data);
+              window.location.href = "/bookings"
+           })
+        // form.submit();
+      }
     })
   }
 
@@ -40,6 +73,11 @@ export default class extends Controller {
     date.setDate(date.getDate()+1);
 
     return date;
+  }
+
+  #getMetaValue(n) {
+    const element = document.head.querySelector(`meta[name="${n}"]`)
+    return element.getAttribute("content")
   }
 
 }

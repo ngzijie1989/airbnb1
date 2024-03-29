@@ -20,12 +20,21 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params2)
     @booking.aproval_status = "pending"
-    @booking.listing_id = booking_params2[:listing_id]
-    @booking.lister_id = Listing.find(booking_params2[:listing_id]).user_id
+    @booking.listing_id = params[:listing_id]
+    @booking.lister_id = Listing.find(params[:listing_id]).user_id
     @booking.buyer_id = current_user.id
-    
-    if @booking.save
-      redirect_to bookings_path
+    @booking.accom_fee = params[:accomFee]
+    @booking.total_fee = params[:total]
+    @booking.service_fee = params[:serviceFee]
+    @booking.cleaning_fee = params[:cleaningFee]
+    @booking.days_to_stay = params[:days]
+
+    if @booking.valid?
+      @booking.save!
+
+      respond_to do |fomat|
+        format.json { render json: { status: @booking.valid? }}
+      end
     else
       @listing = Listing.find(params[:listing_id])
       render "new", status: :unprocessable_entity

@@ -9,8 +9,10 @@
   </div>
 
   <div class="row">
-    <div data-controller="datepicker"class="col-7 card p-2">
-        <%= simple_form_for @booking, url: listing_bookings_path(@listing) do |f| %>
+    <div data-controller="datepicker" 
+    data-datepicker-id-value= "<%= @listing.id %>"
+    class="col-7 card p-2">
+        <%= simple_form_for @booking, data: { datepicker_target: "form" }  do |f| %>
           <%= f.hidden_field :listing_id, :value=> params[:listing_id] %>
           <%= f.input :start_date, as: :string, input_html: { data: { action: "input->datepicker#update change->pricecalc#calc", "datepicker-target"=>"startDate", "pricecalc-target"=>"calcStartDate" } } %>
           <%= f.input :end_date, as: :string, input_html: { data: { action: "input->datepicker#update change->pricecalc#calc", "datepicker-target"=>"endDate", "pricecalc-target"=>"calcEndDate" } } %>
@@ -51,16 +53,16 @@
                 <div class="col-3 price-end">
                   <p class="border-bottom"><b>Total</b></p>
                   <div class="price-row">
-                    <p><span>$</span><span data-pricecalc-target = "pricePerNight" data-datepicker-target = "pricePerNight">0</span></p>
-                    <p><span>$</span><span data-pricecalc-target = "serviceFeePerNight" data-datepicker-target = "serviceFeePerNight">0</span></p>
-                    <p><span>$</span><span data-pricecalc-target = "cleaningFeePerNight" data-datepicker-target = "cleaningFeePerNight">0</span></p>
+                    <p><span>$</span><span data-pricecalc-target = "pricePerNight" data-datepicker-target = "accomFee">0</span></p>
+                    <p><span>$</span><span data-pricecalc-target = "serviceFeePerNight" data-datepicker-target = "serviceFee">0</span></p>
+                    <p><span>$</span><span data-pricecalc-target = "cleaningFeePerNight" data-datepicker-target = "cleaningFee">0</span></p>
                   </div>
-                    <p class="border-top"><span>$</span><span data-pricecalc-target = "total">0</span></p>
+                    <p class="border-top"><span>$</span><span data-pricecalc-target = "total" data-datepicker-target = "total">0</span></p>
                 </div>
               </div>
             </div>
           </div>
-          <%= f.button :submit, class:"btn btn-primary w-100", value: "Reserve", "data-action": "click->datepicker#fire click->pricecalc#submit" %>
+          <%= f.button :submit, class:"btn btn-primary w-100", value: "Reserve", "data-action": "click->datepicker#fire" %>
         <% end %>
     </div>
 

@@ -18,7 +18,7 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log(this.daysTarget)
+
   }
 
   calc(){
@@ -26,9 +26,6 @@ export default class extends Controller {
     const endDate = Date.parse(this.calcEndDateTarget.value)
 
     const days = (endDate - startDate) / 3600 / 24 / 1000
-
-    console.log(startDate)
-    console.log(endDate)
     
     if (isNaN(startDate) || isNaN(endDate)) {
     this.pricePerNightTarget.innerHTML = `0`
@@ -51,8 +48,4 @@ export default class extends Controller {
     }
   }
 
-  submit(e){
-    e.preventDefault;
-    console.log("submit")
-  }
 }
