@@ -1,0 +1,8 @@
+<button> My Listings </button>
+<button> Bookings </button>
+<button> Pending Bookings </button>
+<button> Approved Bookings </button>
+
+<% @listings.each do |listing| %>
+<%= listing.service_fee_per_night %>
+<% end %>

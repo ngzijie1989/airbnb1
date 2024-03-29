@@ -23,6 +23,6 @@ Rails.application.routes.draw do
   end
 
   get "/account_info", to: "pages#account_info", as: "account_info"
-  
+  get "/dashboard", to: "pages#dashboard", as: "dashboard"
   resources :favorites, only: %i[index]
 end
