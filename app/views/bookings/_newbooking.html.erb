@@ -1,0 +1,8 @@
+<%= simple_form_for booking, data: { datepicker_target: "form" }  do |f| %>
+  <%= f.hidden_field :listing_id, :value=> params[:listing_id] %>
+  <%= f.input :start_date, as: :string, input_html: { data: { action: "input->datepicker#update change->pricecalc#calc", "datepicker-target"=>"startDate", "pricecalc-target"=>"calcStartDate" } } %>
+  <%= f.input :end_date, as: :string, input_html: { data: { action: "input->datepicker#update change->pricecalc#calc", "datepicker-target"=>"endDate", "pricecalc-target"=>"calcEndDate" } } %>
+  <%= f.input :no_of_guests, collection: (1..5) %>
+  <%= f.input :payment, collection: ["Visa", "Mastercard", "Paypal"] %>
+  <%= f.button :submit, class:"btn btn-primary w-100", value: "Reserve", "data-action": "click->datepicker#fire" %>
+<% end %>

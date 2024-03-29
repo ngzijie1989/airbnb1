@@ -12,7 +12,8 @@ export default class extends Controller {
     "serviceFee",
     "cleaningFee",
     "total",
-    "form"
+    "form",
+    "render"
   ];
 
   static values = {
@@ -22,6 +23,7 @@ export default class extends Controller {
   connect() {
     this.startDateChange = flatpickr( this.startDateTarget, { minDate: "today" } );
     this.endDateChange = flatpickr( this.endDateTarget, { minDate: this.getNextDay(new Date())} );
+    console.log(this.renderTarget.innerHTML)
   }
 
   update(){
@@ -62,9 +64,11 @@ export default class extends Controller {
            .then(response => response.json())
            .then((data)=>{
               if (data.status === true) {
-              window.location.href = "/bookings"
+              window.location.replace("/bookings")
               } else {
-              window.location.reload();
+                this.renderTarget.innerHTML = data.info;
+                this.startDateChange = flatpickr( this.startDateTarget, { minDate: "today" } );
+                this.endDateChange = flatpickr( this.endDateTarget, { minDate: this.getNextDay(new Date())} );
               }
            })
         // form.submit();
