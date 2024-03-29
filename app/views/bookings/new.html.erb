@@ -5,7 +5,7 @@
   </div>
 
   <div class="row">
-    <div data-controller="datepicker" class="col-8">
+    <div data-controller="datepicker" class="col-7">
         <%= simple_form_for @booking, url: listing_bookings_path(@listing) do |f| %>
           <%= f.hidden_field :listing_id, :value=> params[:listing_id] %>
           <%= f.input :start_date, as: :string, input_html: { data: { action: "input->datepicker#update", "datepicker-target"=>"startDate" } } %>
@@ -16,7 +16,7 @@
         <% end %>
     </div>
 
-    <div class="col-4">
+    <div class="col-5">
       <div class="card p-3">
         <div class="row">
           <% if @listing.photos.attached? %>
