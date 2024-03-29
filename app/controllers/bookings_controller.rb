@@ -28,17 +28,15 @@ class BookingsController < ApplicationController
     @booking.service_fee = params[:serviceFee]
     @booking.cleaning_fee = params[:cleaningFee]
     @booking.days_to_stay = params[:days]
-
-    if @booking.valid?
-      @booking.save!
+    @booking.save
 
       respond_to do |fomat|
         format.json { render json: { status: @booking.valid? }}
       end
-    else
-      @listing = Listing.find(params[:listing_id])
-      render "new", status: :unprocessable_entity
-    end
+
+      # @listing = Listing.find(params[:listing_id])
+      # render "new", status: :unprocessable_entity
+
 
     authorize @booking
   end
