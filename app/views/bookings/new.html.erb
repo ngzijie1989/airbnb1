@@ -1,18 +1,66 @@
-<div class="container">
+
+<div class="container" data-controller="pricecalc"
+ data-pricecalc-night-value= "<%= @listing.price_per_night %>"
+ data-pricecalc-servicefee-value= "<%= @listing.service_fee_per_night %>"
+ data-pricecalc-cleaningfee-value= "<%= @listing.cleaning_fee_per_night %>">
   <div class="row">
     <h1>You are nearly there...</h1>
     <p>Please confirm your details and payment before your booking is reserved</p>
   </div>
 
   <div class="row">
-    <div data-controller="datepicker" class="col-7">
+    <div data-controller="datepicker"class="col-7 card p-2">
         <%= simple_form_for @booking, url: listing_bookings_path(@listing) do |f| %>
           <%= f.hidden_field :listing_id, :value=> params[:listing_id] %>
-          <%= f.input :start_date, as: :string, input_html: { data: { action: "input->datepicker#update", "datepicker-target"=>"startDate" } } %>
-          <%= f.input :end_date, as: :string, input_html: { data: { action: "input->datepicker#update", "datepicker-target"=>"endDate" } } %>
+          <%= f.input :start_date, as: :string, input_html: { data: { action: "input->datepicker#update change->pricecalc#calc", "datepicker-target"=>"startDate", "pricecalc-target"=>"calcStartDate" } } %>
+          <%= f.input :end_date, as: :string, input_html: { data: { action: "input->datepicker#update change->pricecalc#calc", "datepicker-target"=>"endDate", "pricecalc-target"=>"calcEndDate" } } %>
           <%= f.input :no_of_guests, collection: (1..5) %>
           <%= f.input :payment, collection: ["Visa", "Mastercard", "Paypal"] %>
-          <%= f.button :submit, class:"btn btn-primary", value: "Reserve", "data-action": "click->datepicker#fire" %>
+
+          <div class="row">
+            <div class="col-4 price-middle">
+              <p class="border-bottom"><b>Type</b></p>
+              <div class="price-row">
+                <p>Accomodation</p>
+                <p>Service Fees</p>
+                <p>Cleaning Fees</p>
+              </div>
+                <p class="border-top">Grand Total</p>
+            </div>
+
+            <div class="col-8">
+              <div class="row">
+                <div class="col-3 price-middle">
+                  <p class="border-bottom"><b>Unit Fee</b></p>
+                  <div class="price-row">
+                    <p>$<%= @listing.price_per_night %></p>
+                    <p>$<%= @listing.service_fee_per_night %></p>
+                    <p>$<%= @listing.cleaning_fee_per_night %></p>
+                  </div>
+                </div>
+
+                <div class="col-6 price-middle">
+                  <p class="border-bottom"><b>Duration of stay</b></p>
+                  <div class="price-row">
+                    <p data-pricecalc-target="days" data-datepicker-target = "days"></p>
+                    <p data-pricecalc-target="days"></p>
+                    <p data-pricecalc-target="days"></p>
+                  </div>
+                </div>
+
+                <div class="col-3 price-end">
+                  <p class="border-bottom"><b>Total</b></p>
+                  <div class="price-row">
+                    <p><span>$</span><span data-pricecalc-target = "pricePerNight" data-datepicker-target = "pricePerNight">0</span></p>
+                    <p><span>$</span><span data-pricecalc-target = "serviceFeePerNight" data-datepicker-target = "serviceFeePerNight">0</span></p>
+                    <p><span>$</span><span data-pricecalc-target = "cleaningFeePerNight" data-datepicker-target = "cleaningFeePerNight">0</span></p>
+                  </div>
+                    <p class="border-top"><span>$</span><span data-pricecalc-target = "total">0</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%= f.button :submit, class:"btn btn-primary w-100", value: "Reserve", "data-action": "click->datepicker#fire click->pricecalc#submit" %>
         <% end %>
     </div>
 

@@ -6,14 +6,12 @@ export default class extends Controller {
   static values = {id: Number}
 
   connect() {
-    console.log(this.faviconTarget.innerHTML)
   }
 
   fire(e){
     e.preventDefault();
 
     const url = `/listings/${this.idValue}/addfavorites`
-    console.log(url)
 
     fetch(url, {
       method: 'GET', 
