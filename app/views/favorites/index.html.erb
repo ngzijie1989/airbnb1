@@ -2,7 +2,7 @@
   <% carousel_id = 0 %>
     <% @listings.each do |listing| %>
       <%= link_to listing_path(listing), class:"text-decoration-none" do%>
-        <div class="parentfav" data-controller="fav" data-fav-id-value = "<%=listing.id%>">
+        <div class="parentfav" data-controller="favindex" data-favindex-id-value = "<%=listing.id%>" data-favindex-target="carddelete">
           <% carousel_id += 1 %>
           <div id="carouselExampleIndicators<%= carousel_id%>" class="carousel slide">
             <div class="carousel-indicators">
@@ -74,11 +74,11 @@
             <% fav_check = @favorites.find_by(listing_id: listing.id, user_id: current_user.id) %>
             <% unless fav_check.nil? %>
               <div>
-                <span class="faviconred" data-action="click->fav#fire" data-fav-target="favicon"><i class="fa-solid fa-heart"></i></span>
+                <span class="faviconred" data-action="click->favindex#fire" data-favindex-target="favicon"><i class="fa-solid fa-heart"></i></span>
               </div>
             <% else %>
               <div>
-                <span class="favicon"  data-action="click->fav#fire" data-fav-target="favicon"><i class="fa-regular fa-heart"></i></span>
+                <span class="favicon"  data-action="click->favindex#fire" data-favindex-target="favicon"><i class="fa-regular fa-heart"></i></span>
               </div>
             <% end %>
 
