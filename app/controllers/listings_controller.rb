@@ -18,9 +18,34 @@ class ListingsController < ApplicationController
     authorize @listing
   end
 
+  def create
+    @listing = Listing.new(listing_params)
+    @listing.user_id = current_user.id
+
+    if @listing.save
+      redirect_to dashboard_path
+      flash[:success]  = "Listing created successfully"
+    else
+      render "new", status: :unprocessable_entity
+    end
+
+    authorize @listing
+  end
+
   def show
     @listing = Listing.find(params[:id])
     @booking = Booking.new
+    authorize @listing
+  end
+
+  def destroy
+    @listing = Listing.find(params[:id])
+    @listing.destroy
+
+    respond_to do |format|
+      format.json {render json: {status: "deleted"}}
+    end
+
     authorize @listing
   end
 
@@ -50,5 +75,17 @@ class ListingsController < ApplicationController
       format.json { render json: {status: fav_check.nil?} }
     end
     authorize @listing
+  end
+
+  def viewing
+    @listing = Listing.find(params[:listing_id])
+
+    authorize @listing
+  end
+
+  private
+
+  def listing_params
+    params.require(:listing).permit(:country, :no_of_rooms, :price_per_night, :location_for_geocode, :service_fee_per_night, :cleaning_fee_per_night, :title, :subtitle, :category_id, :state, :description, photos: [])
   end
 end

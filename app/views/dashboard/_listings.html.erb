@@ -1,0 +1,32 @@
+  <div class="index-container">
+<% listings.each do |listing| %>
+  <div class="card listing-index-card">
+    <div class="d-flex">
+      <div>
+        <% if listing.photos.attached? %>
+          <%= cl_image_tag listing.photos[0].key, class:"listing-index-image" %>
+        <% else %>
+          <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"listing-index-image" %>
+        <% end %>
+      </div>
+
+      <div class="listing-index-content d-flex flex-column">
+        <div class="flex-grow-1">
+          <p>Title: <%= listing.title %></p>
+          <p>Subtitle: <%= listing.subtitle %></p>
+          <p>Number of rooms: <%= listing.no_of_rooms %></p>
+          <p>Service Fee Per Night: $<%= listing.service_fee_per_night %></p>
+          <p>Cleaning Fee Per Night: $<%= listing.cleaning_fee_per_night %></p>
+          <p>Accomodation Fee Per Night: $<%= listing.price_per_night %></p>
+          <p>Description: <%= listing.description %></p>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <%= link_to "View more details", listing_viewing_path(listing), class:"p-1 text-decoration-none" %>
+          <%= link_to "Edit Listing", edit_listing_path(listing), class:"p-1 text-decoration-none" %>
+          <%= link_to "Delete Listing", listing_path(listing), class:"p-1 text-decoration-none", data: {action: "click->dashboard#delete", listing_id: listing.id, dashboard_target: "delete"} %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

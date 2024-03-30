@@ -1,20 +1,35 @@
 <div class="container-dashboard" data-controller="dashboard">
   <div class="btns-dashboard">
-    <button class="btn activeselect"> My Listings </button>
-    <button class="btn"> Bookings </button>
-    <button class="btn"> Pending Bookings </button>
-    <button class="btn"> Approved Bookings </button>
+    <a data-header="listings" data-dashboard-target="toggle" data-action="click->dashboard#toggleable" class="btn-dashboard activeselect"> My Listings </a>
+    <a data-header="pending" data-dashboard-target="toggle" data-action="click->dashboard#toggleable" class="btn-dashboard"> Bookings awaiting your approval </a>
+    <a data-header="approved" data-dashboard-target="toggle" data-action="click->dashboard#toggleable" class="btn-dashboard"> Approved Bookings </a>
   </div>
 
-  <div class="content-dashboard">
-    <% if @listings.count.zero? %>
-      <p><em>You do not have any listings yet.</em></p>
-      <%= link_to "Add a listing?", new_listing_path %>
-    <% else %>
-      <% @listings.each do |listing| %>
-        <%= listing.service_fee_per_night %>
+  <div class="row content-listings" >
+    <div data-content="listings" class="content-dashboard" data-dashboard-target="contentToggle">
+      <% if @listings.count.zero? %>
+        <p><em>You do not have any listings yet.</em></p>
+        <%= link_to "Create a listing?", new_listing_path %>
+      <% else %>
+        <%= link_to "Create another listing?", new_listing_path, class:"text-decoration-none text-primary-emphasis link-to-add-listing" %>
+        <%= render "dashboard/listings", listings: @listings %>
       <% end %>
-      <%= link_to "Add another listing?", new_listing_path %>
-    <% end %>
+    </div>
+    
+    <div data-content="pending" class="content-pendingbookings d-none" data-dashboard-target="contentToggle">
+      <% if @pending_bookings.count == 0 %>
+        <p><em>You do not have any bookings to be approved</em></p>
+      <% else %>
+        <%= render "dashboard/pendingbookings", pending_bookings: @pending_bookings %>
+      <% end %>
+    </div>
+    
+    <div data-content="approved" class="content-approvedbookings d-none" data-dashboard-target="contentToggle">
+      <% if @approved_bookings.count == 0 %>
+        <p><em>You do not have any approved bookings yet</em></p>
+      <% else %>
+        <%= render "dashboard/approvedbookings", approved_bookings: @approved_bookings%>
+      <% end %>
+    </div>
   </div>
 </div>

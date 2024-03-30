@@ -13,6 +13,10 @@ class ListingPolicy < ApplicationPolicy
     true
   end
 
+  def viewing?
+    record.user == user
+  end
+
   def bookedlistingshow?
     true
   end
@@ -23,5 +27,13 @@ class ListingPolicy < ApplicationPolicy
 
   def new?
     true
+  end
+
+  def create?
+    true
+  end
+
+  def destroy?
+    record.user == user
   end
 end

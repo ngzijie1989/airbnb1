@@ -14,12 +14,14 @@ Rails.application.routes.draw do
   resources :listings do
     resources :bookings, only: %i[create new]
     
+    get "/viewing", to: "listings#viewing", as: "viewing"
     get "/addfavorites", to: "listings#addfavorites", as: "add_favorites"
   end
 
   resources :bookings, only: %i[index show] do
     get "/listings/:id", to: "listings#bookedlistingshow", as: "view_listing"
     get "/sendreminder", to: "bookings#sendreminder", as: "sendreminder"
+    get "/review", to: "bookings#reviewbooking", as: "review"
   end
 
   get "/account_info", to: "pages#account_info", as: "account_info"

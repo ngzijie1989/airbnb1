@@ -2,22 +2,64 @@
   width: 80%;
   margin: 0 auto;
 
+  .link-to-add-listing{
+
+    &:hover{
+      font-weight:bold;
+    }
+  }
+
   .btns-dashboard{
     text-align:center;
 
-    .btn{
+    .btn-dashboard{
+      color: black;
+      padding: 0.8rem;
       
       &:hover{
         font-weight: bold;
+        text-decoration:none;
+        cursor: pointer;
       }
     }
 
     .activeselect{
       font-weight: bold;
+      pointer-events: none;
     }
   }
 
   .content-dashboard{
     margin-top: 2rem;
+  }
+}
+
+.index-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+  padding: 0rem 5rem;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.listing-index-card{
+  padding: 0.8rem;
+
+  .listing-index-image{
+    height: 200px;
+    width: 250px;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+
+  .listing-index-content{
+    padding-left: 0.5rem;
+    font-size: 0.8rem;
+    
+    p{
+      margin: 0;
+    }
   }
 }

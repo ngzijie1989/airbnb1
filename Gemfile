@@ -53,6 +53,8 @@ gem "devise"
 gem "pundit"
 gem "cloudinary"
 gem "pg_search"
+gem 'country_select', '~> 8.0'
+gem 'simple_form_fancy_uploads'
 
 group :development, :test do
   gem "dotenv-rails"

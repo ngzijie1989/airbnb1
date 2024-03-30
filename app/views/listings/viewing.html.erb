@@ -32,18 +32,11 @@
   <% end %>
 
   <div class="row pt-3">
-    <div class="col-8">
       <h3><%= @listing.subtitle %></h3>
       <p><%= @listing.state %>, <%= @listing.country %></p>
       <p><%= @listing.no_of_rooms %> rooms</p>
       <p><%= @listing.description %> rooms</p>
-    </div>
-
-    <div class="col-4">
-      <div class="card p-3">
-        <p><strong>$<%= @listing.price_per_night %></strong> SGD per night</p>
-        <%= link_to "Book Now", new_listing_booking_path(@listing), class:"btn btn-primary w-100" %>
-      </div>
-    </div>
   </div>
+
+  <%= link_to "Back", :back %>
 </div>
