@@ -1,8 +1,20 @@
-<button> My Listings </button>
-<button> Bookings </button>
-<button> Pending Bookings </button>
-<button> Approved Bookings </button>
+<div class="container-dashboard" data-controller="dashboard">
+  <div class="btns-dashboard">
+    <button class="btn activeselect"> My Listings </button>
+    <button class="btn"> Bookings </button>
+    <button class="btn"> Pending Bookings </button>
+    <button class="btn"> Approved Bookings </button>
+  </div>
 
-<% @listings.each do |listing| %>
-<%= listing.service_fee_per_night %>
-<% end %>
+  <div class="content-dashboard">
+    <% if @listings.count.zero? %>
+      <p><em>You do not have any listings yet.</em></p>
+      <%= link_to "Add a listing?", new_listing_path %>
+    <% else %>
+      <% @listings.each do |listing| %>
+        <%= listing.service_fee_per_night %>
+      <% end %>
+      <%= link_to "Add another listing?", new_listing_path %>
+    <% end %>
+  </div>
+</div>

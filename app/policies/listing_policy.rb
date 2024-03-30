@@ -20,4 +20,8 @@ class ListingPolicy < ApplicationPolicy
   def addfavorites?
     true
   end
+
+  def new?
+    true
+  end
 end
