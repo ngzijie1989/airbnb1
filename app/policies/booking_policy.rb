@@ -25,4 +25,16 @@ class BookingPolicy < ApplicationPolicy
   def sendreminder?
     record.buyer == user
   end
+
+  def reviewbooking?
+    record.lister == user
+  end
+
+  def approve?
+    record.lister == user
+  end
+
+  def reject?
+    record.lister == user
+  end
 end

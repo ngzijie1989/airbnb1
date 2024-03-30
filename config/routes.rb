@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     get "/listings/:id", to: "listings#bookedlistingshow", as: "view_listing"
     get "/sendreminder", to: "bookings#sendreminder", as: "sendreminder"
     get "/review", to: "bookings#reviewbooking", as: "review"
+    get "/approvebooking", to: "bookings#approve", as: "approve"
+    get "/rejectbooking", to: "bookings#reject", as: "reject"
   end
 
   get "/account_info", to: "pages#account_info", as: "account_info"

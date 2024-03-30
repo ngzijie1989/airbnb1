@@ -11,15 +11,18 @@
         <p> Start Date: <%= start_date %> </p>
         <p> End Date: <%= end_date %> </p>
         <p> No of Guests: <%= @booking.no_of_guests %> </p>
-        <% days = (@booking.end_date - @booking.start_date).to_i %>
         <div class="d-flex justify-content-between">
-          <p>Total Price: <strong>$<%= @listing.price_per_night*days %></strong> SGD</p>
+          <p>Total Price: <strong>$<%= @booking.total_fee %></strong> SGD</p>
         </div>
       </div>
 
       <div>
         <% days_left = (@booking.start_date - Time.now.to_date).to_i %>
-        <p>You are just <%= days_left %> days to your stay in <strong><%= @listing.title %></strong> </p>
+        <% if days_left == 0 %>
+          <p>Today is the day of your stay! If you still have not received the confirmation from your host, please arrange for another accom or contact customer service </p>
+        <% else %>
+          <p>You are just <%= days_left %> days to your stay in <strong><%= @listing.title %></strong> </p>
+        <% end %>
         
         <% if @booking.aproval_status == "pending" && days_left <= 5  %>
           <%= link_to "Send Reminder to host to review the status", booking_sendreminder_path(@booking) %>
@@ -30,7 +33,7 @@
     <div class="col-6">
 
       <% if @listing.photos.attached? %>
-        <%= cl_image_tag listing.photos[0].key, class:"booking-image-show" %>
+        <%= cl_image_tag @listing.photos[0].key, class:"booking-image-show" %>
       <% else %>
         <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"booking-image-show" %>
       <% end %>

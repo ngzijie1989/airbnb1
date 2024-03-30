@@ -11,13 +11,13 @@
           <% end %>
         </div>
 
-        <div class="listing-index-content d-flex flex-column">
+        <div class="listing-index-content d-flex flex-column w-100">
           <div class="flex-grow-1">
-            <p>Booked by: <% User.find(booking.buyer_id).username %></p>
-            <p>Email: <% User.find(booking.buyer_id).email %></p>
-            <p>Approval status: <% booking.aproval_status %></p>
-            <p>Duration of stay: <% booking.days_to_stay %></p>
-            <p>Total price: <% booking.total_fee %></p>
+            <p>Booked by: <%= User.find(booking.buyer_id).username %></p>
+            <p>Email: <%= User.find(booking.buyer_id).email %></p>
+            <p>Approval status: <%= booking.aproval_status %></p>
+            <p>Duration of stay: <%= booking.days_to_stay %></p>
+            <p>Total price: $<%= booking.total_fee %></p>
           </div>
 
           <div class="d-flex justify-content-end">

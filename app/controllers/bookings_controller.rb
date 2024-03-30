@@ -48,6 +48,29 @@ class BookingsController < ApplicationController
     authorize @booking
   end
 
+  def reviewbooking
+    @booking = Booking.find(params[:booking_id])
+    @listing = Listing.find(@booking.listing_id)
+
+    authorize @booking
+  end
+
+  def approve
+    @booking = Booking.find(params[:booking_id])
+    @booking.aproval_status = "approved"
+    @booking.save
+
+    authorize @booking
+  end
+
+  def reject
+    @booking = Booking.find(params[:booking_id])
+    @booking.aproval_status = "rejected"
+    @booking.save
+
+    authorize @booking
+  end
+
   private
 
   def booking_params2
