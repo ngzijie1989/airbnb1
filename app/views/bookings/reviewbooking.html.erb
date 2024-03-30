@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="d-flex" data-controller="bookingstatus">
+    <div class="d-flex" data-controller="bookingstatus" data-bookingstatus-id-value = "<%= @booking.id%>">
       <%=link_to "Approve", booking_approve_path(@booking), class:"btn btn-success w-100 m-3", data: { action: "click->bookingstatus#approve" } %>
       <%=link_to "Reject", booking_reject_path(@booking), class:"btn btn-secondary w-100 m-3", data: { action: "click->bookingstatus#reject" }  %>
     </div>

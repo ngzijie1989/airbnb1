@@ -32,7 +32,7 @@ class BookingsController < ApplicationController
     @booking.save
 
     respond_to do |format|
-      format.json
+      format.json 
     end
 
       # @listing = Listing.find(params[:listing_id])
@@ -60,6 +60,10 @@ class BookingsController < ApplicationController
     @booking.aproval_status = "approved"
     @booking.save
 
+    respond_to do |format|
+      format.json {render json: {status: "ok"}}
+    end
+
     authorize @booking
   end
 
@@ -67,6 +71,10 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:booking_id])
     @booking.aproval_status = "rejected"
     @booking.save
+
+    respond_to do |format|
+      format.json {render json: {status: "ok"}}
+    end
 
     authorize @booking
   end
