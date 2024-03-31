@@ -93,6 +93,8 @@ export default class extends Controller {
     this.discountTargets.forEach((t)=>{
       t.classList.toggle("d-none")
     })
+    this.discountedtabulatedTarget.innerHTML = 0;
+    this.finalafterdiscountTarget.innerHTML = 0;
   }
 
   range(){
