@@ -14,7 +14,11 @@ export default class extends Controller {
     "total",
     "form",
     "render",
-    "discount"
+    "discount",
+    "discountvalue",
+    "discountedtabulated",
+    "finalafterdiscount",
+    "startdiscount"
   ];
 
   static values = {
@@ -24,9 +28,16 @@ export default class extends Controller {
   connect() {
     this.startDateChange = flatpickr( this.startDateTarget, { minDate: "today" } );
     this.endDateChange = flatpickr( this.endDateTarget, { minDate: this.getNextDay(new Date())} );
+    console.log(typeof parseInt(this.totalTarget.innerHTML))
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
   }
 
   update(){
+    if (this.endDateTarget.value && this.startDateTarget.value) {
+      this.startdiscountTarget.classList.remove("d-none")
+    }
+
     if (this.endDateTarget.value)
       this.startDateChange.config.maxDate = this.endDateTarget.value;
     if (this.startDateTarget.value)
@@ -69,6 +80,8 @@ export default class extends Controller {
                 this.renderTarget.innerHTML = data.info;
                 this.startDateChange = flatpickr( this.startDateTarget, { minDate: "today" } );
                 this.endDateChange = flatpickr( this.endDateTarget, { minDate: this.getNextDay(new Date())} );
+                const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+                const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
               }
            })
         // form.submit();
@@ -80,6 +93,11 @@ export default class extends Controller {
     this.discountTargets.forEach((t)=>{
       t.classList.toggle("d-none")
     })
+  }
+
+  range(){
+    this.discountedtabulatedTarget.innerHTML = Math.ceil(this.discountvalueTarget.value / 1000) ;
+    this.finalafterdiscountTarget.innerHTML = parseInt(this.totalTarget.innerHTML) - parseInt(this.discountedtabulatedTarget.innerHTML)
   }
 
   getNextDay(date) {

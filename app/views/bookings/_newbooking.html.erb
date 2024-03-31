@@ -4,12 +4,12 @@
   <%= f.input :end_date, as: :string, input_html: { data: { action: "input->datepicker#update change->pricecalc#calc", "datepicker-target"=>"endDate", "pricecalc-target"=>"calcEndDate" } } %>
   <%= f.input :no_of_guests, collection: (1..5) %>
   <%= f.input :payment, collection: ["Visa", "Mastercard", "Paypal"] %>
-  <div class="form-switch">
+  <div class="form-switch d-none" data-datepicker-target="startdiscount">
     <%= f.input :apply_discount, as: :boolean, label: "Apply discount using airbnb points", input_html: { data: { action: "click->datepicker#discount"}} %>
   </div>
   <div class="d-none mb-2", data-datepicker-target="discount">
-    <p>Discount (Available Points: <span><%= @user.points %></span>)<p>
-    <%= f.input :discount_applied, label: false, as: :range, input_html: { class: "form-range", min: 0, max: @user.points} %>
+    <p>Discount <span class="info-discount" data-bs-toggle="popover" data-bs-title="Airbnb exchanges 1000 points for $1 discount!" data-bs-content="Available Points: <%= @user.points %>"><i class="fa-solid fa-circle-info"></i></span><p>
+    <%= f.input :discount_applied, label: false, as: :range, input_html: { data: { action:"change->datepicker#range", "datepicker-target"=>"discountvalue"}, class: "form-range", min: 0, max: @user.points, step: 1000} %>
   </div>
   <%= f.button :submit, class:"btn btn-primary w-100", value: "Reserve", "data-action": "click->datepicker#fire" %>
 <% end %>
