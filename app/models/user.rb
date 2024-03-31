@@ -7,4 +7,9 @@ class User < ApplicationRecord
   has_many :listings
   has_one_attached :photo
   has_many :favorites
+  has_many :redemptions
+
+  def approve_add_points(days)
+    self.points += days * 500
+  end
 end

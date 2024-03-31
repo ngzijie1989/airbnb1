@@ -59,6 +59,10 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:booking_id])
     @booking.aproval_status = "approved"
     @booking.save
+    @user = User.find(@booking.buyer_id)
+    @days = @booking.days_to_stay
+    @user.approve_add_points(@days)
+    @user.save
 
     respond_to do |format|
       format.json {render json: {status: "ok"}}

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     get "/addfavorites", to: "listings#addfavorites", as: "add_favorites"
   end
 
-  resources :bookings, only: %i[index show] do
+  resources :bookings, only: %i[index show destroy] do
     get "/listings/:id", to: "listings#bookedlistingshow", as: "view_listing"
     get "/sendreminder", to: "bookings#sendreminder", as: "sendreminder"
     get "/review", to: "bookings#reviewbooking", as: "review"
