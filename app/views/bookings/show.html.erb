@@ -18,15 +18,17 @@
 
       <div>
         <% days_left = (@booking.start_date - Time.now.to_date).to_i %>
-        <% if days_left == 0 %>
+        <% if days_left < 0 %>
+          <p> Did you enjoy ur stay? Leave a <%= link_to "review", listings_path %> <p>
+        <% elsif days_left == 0 %>
           <p>Today is the day of your stay! If you still have not received the confirmation from your host, please arrange for another accom or contact customer service </p>
         <% else %>
           <p>You are just <%= days_left %> days to your stay in <strong><%= @listing.title %></strong> </p>
+          <% if @booking.aproval_status == "pending" && days_left <= 5  %>
+            <%= link_to "Send Reminder to host to review the status", booking_sendreminder_path(@booking) %>
+          <% end %>
         <% end %>
         
-        <% if @booking.aproval_status == "pending" && days_left <= 5  %>
-          <%= link_to "Send Reminder to host to review the status", booking_sendreminder_path(@booking) %>
-        <% end %>
       </div>
     </div>
 

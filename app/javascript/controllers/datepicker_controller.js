@@ -13,7 +13,8 @@ export default class extends Controller {
     "cleaningFee",
     "total",
     "form",
-    "render"
+    "render",
+    "discount"
   ];
 
   static values = {
@@ -23,7 +24,6 @@ export default class extends Controller {
   connect() {
     this.startDateChange = flatpickr( this.startDateTarget, { minDate: "today" } );
     this.endDateChange = flatpickr( this.endDateTarget, { minDate: this.getNextDay(new Date())} );
-    console.log(this.renderTarget.innerHTML)
   }
 
   update(){
@@ -73,6 +73,12 @@ export default class extends Controller {
            })
         // form.submit();
       }
+    })
+  }
+
+  discount(){
+    this.discountTargets.forEach((t)=>{
+      t.classList.toggle("d-none")
     })
   }
 

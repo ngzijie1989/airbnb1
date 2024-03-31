@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_001428) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_31_090716) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_001428) do
     t.integer "cleaning_fee"
     t.integer "days_to_stay"
     t.integer "service_fee"
+    t.boolean "apply_discount", default: false
+    t.integer "discount_applied", default: 0
     t.index ["buyer_id"], name: "index_bookings_on_buyer_id"
     t.index ["lister_id"], name: "index_bookings_on_lister_id"
     t.index ["listing_id"], name: "index_bookings_on_listing_id"
@@ -104,6 +106,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_001428) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "booking_id"
+    t.index ["booking_id"], name: "index_redemptions_on_booking_id"
     t.index ["user_id"], name: "index_redemptions_on_user_id"
   end
 
@@ -132,5 +136,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_001428) do
   add_foreign_key "favorites", "users"
   add_foreign_key "listings", "categories"
   add_foreign_key "listings", "users"
+  add_foreign_key "redemptions", "bookings"
   add_foreign_key "redemptions", "users"
 end
