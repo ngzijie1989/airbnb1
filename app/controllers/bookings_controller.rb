@@ -30,7 +30,27 @@ class BookingsController < ApplicationController
     @booking.cleaning_fee = params[:cleaningFee]
     @booking.days_to_stay = params[:days]
     @listing = Listing.find(params[:listing_id])
-    @booking.save
+    @user = current_user
+
+    if params[:booking][:apply_discount] == "1"
+      @booking.apply_discount = true
+      @booking.discount = params[:discount]
+      @booking.discounted_total = params[:discountedTotal]
+      @redemption = Redemption.new
+      @redemption.points_redeemed = params[:booking][:points_used]
+      @redemption.user_id = @user.id
+      @redemption.discount_applied = params[:discount]
+
+    else 
+      @booking.apply_discount = false
+      @booking.discount = nil
+      @booking.discounted_total = nil
+    end
+
+    if @booking.save && params[:booking][:apply_discount] == "1"
+      @redemption.booking_id = @booking.id
+      @redemption.save
+    end
 
     respond_to do |format|
       format.json 

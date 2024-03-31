@@ -11,9 +11,9 @@
   <div class="row">
     <div data-controller="datepicker" 
     data-datepicker-id-value= "<%= @listing.id %>"
-    class="col-7 card p-2">
+    class="col-7 card p-2 mb-3">
       <div data-datepicker-target="render">
-        <%= render "newbooking", listing: @listing, booking: @booking %>
+        <%= render "newbooking", listing: @listing, booking: @booking, user: @user %>
       </div>
 
       <div class="row mt-3">

@@ -18,7 +18,9 @@ export default class extends Controller {
     "discountvalue",
     "discountedtabulated",
     "finalafterdiscount",
-    "startdiscount"
+    "startdiscount",
+    "startingpoints",
+    "userpoints"
   ];
 
   static values = {
@@ -28,7 +30,7 @@ export default class extends Controller {
   connect() {
     this.startDateChange = flatpickr( this.startDateTarget, { minDate: "today" } );
     this.endDateChange = flatpickr( this.endDateTarget, { minDate: this.getNextDay(new Date())} );
-    console.log(typeof parseInt(this.totalTarget.innerHTML))
+    console.log(typeof parseInt(this.discountvalueTarget.value))
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
   }
@@ -64,6 +66,8 @@ export default class extends Controller {
         formData.append('cleaningFee', this.cleaningFeeTarget.innerHTML);
         formData.append('total', this.totalTarget.innerHTML);
         formData.append('days', this.daysTarget.innerHTML);
+        formData.append('discount', this.discountedtabulatedTarget.innerHTML);
+        formData.append('discountedTotal', this.finalafterdiscountTarget.innerHTML);
 
         fetch(url, 
           {method: "POST",
@@ -100,6 +104,8 @@ export default class extends Controller {
   range(){
     this.discountedtabulatedTarget.innerHTML = Math.ceil(this.discountvalueTarget.value / 1000) ;
     this.finalafterdiscountTarget.innerHTML = parseInt(this.totalTarget.innerHTML) - parseInt(this.discountedtabulatedTarget.innerHTML)
+    const initialPoints = parseInt(this.userpointsTarget.innerHTML)
+    this.startingpointsTarget.innerHTML = initialPoints - this.discountvalueTarget.value
   }
 
   getNextDay(date) {

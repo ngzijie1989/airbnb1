@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_090716) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_31_135640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,7 +59,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_090716) do
     t.integer "days_to_stay"
     t.integer "service_fee"
     t.boolean "apply_discount", default: false
-    t.integer "discount_applied", default: 0
+    t.integer "points_used"
+    t.integer "discounted_total"
+    t.integer "discount"
     t.index ["buyer_id"], name: "index_bookings_on_buyer_id"
     t.index ["lister_id"], name: "index_bookings_on_lister_id"
     t.index ["listing_id"], name: "index_bookings_on_listing_id"
@@ -102,11 +104,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_090716) do
   end
 
   create_table "redemptions", force: :cascade do |t|
-    t.integer "points_to_redeem"
+    t.integer "points_redeemed"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "booking_id"
+    t.integer "discount_applied"
     t.index ["booking_id"], name: "index_redemptions_on_booking_id"
     t.index ["user_id"], name: "index_redemptions_on_user_id"
   end
