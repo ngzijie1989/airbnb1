@@ -24,10 +24,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  #DELETE /resource
+  def destroy
+    check = Booking.where('buyer_id = :user_id OR lister_id = :user_id', user_id: current_user.id).exists?
+    if check
+      flash[:alert] = "Your account cannot be deleted because you have existing bookings."
+      redirect_to account_info_path
+    else
+      super
+    end
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

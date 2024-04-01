@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
   root to: "listings#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -18,12 +18,14 @@ Rails.application.routes.draw do
     get "/addfavorites", to: "listings#addfavorites", as: "add_favorites"
   end
 
-  resources :bookings, only: %i[index show destroy] do
+  resources :bookings, only: %i[index show destroy edit update] do
     get "/listings/:id", to: "listings#bookedlistingshow", as: "view_listing"
     get "/sendreminder", to: "bookings#sendreminder", as: "sendreminder"
     get "/review", to: "bookings#reviewbooking", as: "review"
     get "/approvebooking", to: "bookings#approve", as: "approve"
     get "/rejectbooking", to: "bookings#reject", as: "reject"
+    get "/cancel", to: "bookings#cancel", as: "cancel"
+    patch "/cancelconfirm", to: "bookings#cancelconfirm", as: "cancelconfirm"
   end
 
   get "/account_info", to: "pages#account_info", as: "account_info"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_135640) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_01_140537) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_135640) do
     t.integer "points_used"
     t.integer "discounted_total"
     t.integer "discount"
+    t.text "reject_reason"
+    t.string "cancel_reason"
     t.index ["buyer_id"], name: "index_bookings_on_buyer_id"
     t.index ["lister_id"], name: "index_bookings_on_lister_id"
     t.index ["listing_id"], name: "index_bookings_on_listing_id"
@@ -86,9 +88,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_135640) do
     t.string "country"
     t.integer "no_of_rooms"
     t.integer "price_per_night"
-    t.string "location_for_geocode"
-    t.integer "longitude"
-    t.integer "latitude"
+    t.string "address"
+    t.float "longitude"
+    t.float "latitude"
     t.integer "service_fee_per_night"
     t.integer "cleaning_fee_per_night"
     t.string "title"
@@ -126,6 +128,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_135640) do
     t.string "bio"
     t.string "name"
     t.integer "points", default: 0
+    t.integer "accumulated_points", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

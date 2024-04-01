@@ -37,4 +37,16 @@ class BookingPolicy < ApplicationPolicy
   def reject?
     record.lister == user
   end
+
+  def destroy?
+    record.lister == user
+  end
+
+  def cancel?
+    record.lister == user
+  end
+
+  def cancelconfirm?
+    record.lister == user
+  end
 end

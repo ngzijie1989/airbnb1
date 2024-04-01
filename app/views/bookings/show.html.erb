@@ -8,7 +8,16 @@
       <div class="flex-grow-1">
         <% start_date = @booking.start_date.strftime("%e").gsub(" ", "").to_i.ordinalize + @booking.start_date.strftime(" %B %Y") %>
         <% end_date = @booking.end_date.strftime("%e").gsub(" ", "").to_i.ordinalize + @booking.end_date.strftime(" %B %Y") %>
-        <p> Start Date: <%= start_date %> </p>
+        <div class="d-flex justify-content-between">
+          <p> Start Date: <%= start_date %> </p>
+          <p> Your host: <%= @user.name %> 
+            <% if @user.photo.attached? %>
+              <%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill, class:"avatar-small" %>
+            <% else %>
+              <%= image_tag "poster boy.jpg", alt: "user", width: 150, class:"avatar-small" %>
+            <% end %>
+          </p>
+        </div>
         <p> End Date: <%= end_date %> </p>
         <p> No of Guests: <%= @booking.no_of_guests %> </p>
         <div class="d-flex justify-content-between">

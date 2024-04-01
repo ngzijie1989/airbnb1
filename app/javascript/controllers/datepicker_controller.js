@@ -30,7 +30,6 @@ export default class extends Controller {
   connect() {
     this.startDateChange = flatpickr( this.startDateTarget, { minDate: "today" } );
     this.endDateChange = flatpickr( this.endDateTarget, { minDate: this.getNextDay(new Date())} );
-    console.log(typeof parseInt(this.discountvalueTarget.value))
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
   }

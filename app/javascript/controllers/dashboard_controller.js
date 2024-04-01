@@ -43,7 +43,6 @@ export default class extends Controller {
     })
 
     const header = e.target.dataset.header;
-    console.log(header)
 
     this.contentToggleTargets.forEach ((n)=> {
       if (n.dataset.content === header) {

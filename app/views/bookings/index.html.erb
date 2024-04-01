@@ -71,10 +71,12 @@
 
 <div class="booking-index-header">
   <h1 class="mt-3">Rejected Bookings (<%= @bookings.where(aproval_status: 'rejected').count %>)</h1>
-<div>
+</div>
 
 <% if @bookings.where(aproval_status: 'rejected').count.zero? %>
+  <div class="nobookings">
   <p><em>You do not have any rejected bookings</em></p>
+  </div>
 <% else %>
   <div class="grid-container">
     <% carousel_id = 0 %>
@@ -108,8 +110,8 @@
 
               </div>
               <div class="booking-status">
-                <% if booking.aproval_status == 'pending' %>
-                  <div class="booking-status-pending">
+                <% if booking.aproval_status == 'rejected' %>
+                  <div class="booking-status-rejected">
                     <span><%= booking.aproval_status %><span>
                   </div>
                 <% else booking.aproval_status == 'Approved' %>

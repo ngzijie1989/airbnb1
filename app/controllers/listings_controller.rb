@@ -35,6 +35,10 @@ class ListingsController < ApplicationController
   def show
     @listing = Listing.find(params[:id])
     @booking = Booking.new
+
+    @markers = [{ lat: @listing.latitude,
+               lng: @listing.longitude}]
+
     authorize @listing
   end
 
@@ -52,6 +56,10 @@ class ListingsController < ApplicationController
   def bookedlistingshow
     @listing = Listing.find(params[:id])
     @booking = Booking.find(params[:booking_id])
+
+    @markers = [{ lat: @listing.latitude,
+    lng: @listing.longitude}]
+    
     authorize @listing
   end
 
@@ -86,6 +94,6 @@ class ListingsController < ApplicationController
   private
 
   def listing_params
-    params.require(:listing).permit(:country, :no_of_rooms, :price_per_night, :location_for_geocode, :service_fee_per_night, :cleaning_fee_per_night, :title, :subtitle, :category_id, :state, :description, photos: [])
+    params.require(:listing).permit(:country, :no_of_rooms, :price_per_night, :address, :service_fee_per_night, :cleaning_fee_per_night, :title, :subtitle, :category_id, :state, :description, photos: [])
   end
 end

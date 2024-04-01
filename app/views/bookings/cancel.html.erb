@@ -1,0 +1,6 @@
+<div class="container">
+  <%= simple_form_for @booking, url: booking_cancelconfirm_path(@booking), method: "patch" do |f| %>
+    <%= f.input :cancel_reason, label: "Please give a reason for your cancellation.", as: :string %>
+    <%= f.button :submit, class:"btn btn-primary w-100", value: "Cancel Booking" %>
+  <% end %>
+</div>

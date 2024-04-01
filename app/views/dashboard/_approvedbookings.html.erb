@@ -20,8 +20,8 @@
             <p>Total price: $<%= booking.total_fee %></p>
           </div>
 
-          <div class="d-flex justify-content-end">
-            <%= link_to "Cancel booking", booking_path(booking), class:"p-1 text-decoration-none" %>
+          <div class="d-flex justify-content-end" data-controller="bookingstatus" data-bookingstatus-id-delete-value= <%= booking.id%>>
+            <%= link_to "Cancel booking", booking_path(booking), class:"p-1 text-decoration-none", data: { action: "click->bookingstatus#delete" } %>
           </div>
         </div>
       </div>

@@ -66,7 +66,7 @@
     </div>
 
     <div class="col-5">
-      <div class="card p-3">
+      <div class="card p-3 mb-4">
         <div class="row">
           <% if @listing.photos.attached? %>
             <%= cl_image_tag @listing.photos[0].key, class:"listing-image" %>
@@ -75,11 +75,22 @@
           <% end %>
         </div>
 
-        <div class="row">
+        <div class="row mt-2">
           <p><%= @listing.title %></p>
           <p><strong>$<%= @listing.price_per_night %></strong> SGD per night</p>
           <p><%= @listing.state %>, <%= @listing.country %></p>
         </div>
+
+        <div class= "map-content">
+          <p>Where you will be staying</p>
+
+          <div class="map-image-new"
+          data-controller="map"
+          data-map-markers-value= "<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

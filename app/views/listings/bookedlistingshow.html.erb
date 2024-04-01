@@ -1,4 +1,6 @@
 <div class="container">
+  <%= link_to "Back", :back %>
+
   <div class="row">
     <h1><%= @listing.title %></h1>
   <div>
@@ -32,11 +34,20 @@
   <% end %>
 
   <div class="row pt-3">
-      <h3><%= @listing.subtitle %></h3>
-      <p><%= @listing.state %>, <%= @listing.country %></p>
-      <p><%= @listing.no_of_rooms %> rooms</p>
-      <p><%= @listing.description %> rooms</p>
+    <h3><%= @listing.subtitle %></h3>
+    <p><%= @listing.state %>, <%= @listing.country %></p>
+    <p><%= @listing.no_of_rooms %> rooms</p>
+    <p><%= @listing.description %> rooms</p>
+  </div>
+  
+  <div class= "map-content mb-4">
+    <h3>Where you will be staying</h3>
 
-      <%= link_to "Back", booking_path(@booking) %>
+    <div class="map-image"
+    data-controller="map"
+    data-map-markers-value= "<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    
+    </div>
   </div>
 </div>

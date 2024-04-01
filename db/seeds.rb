@@ -11,7 +11,9 @@ require 'faker'
 #   end
 
 puts "deleting all entries"
+Redemption.destroy_all
 Booking.destroy_all
+Favorite.destroy_all
 Listing.destroy_all
 Category.destroy_all
 User.destroy_all
@@ -41,7 +43,7 @@ Listing.create!(country: Faker::Address.country,
                   awaits!",
                 category_id: cat_array.sample.id, 
                 price_per_night: 150, 
-                location_for_geocode: Faker::Address.full_address, 
+                address: Faker::Address.full_address, 
                 service_fee_per_night: 30, 
                 cleaning_fee_per_night: 15, 
                 title: Faker::Quote.famous_last_words, 

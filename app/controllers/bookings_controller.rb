@@ -8,12 +8,17 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     @listing = Listing.find(params[:listing_id])
     @user = current_user
+
+    @markers = [{ lat: @listing.latitude,
+    lng: @listing.longitude}]
+
     authorize @booking
   end
 
   def show
     @booking = Booking.find(params[:id])
     @listing = Listing.find(@booking.listing_id)
+    @user = User.find(@listing.user_id)
 
     authorize @booking
   end
@@ -40,6 +45,7 @@ class BookingsController < ApplicationController
       @redemption.points_redeemed = params[:booking][:points_used]
       @redemption.user_id = @user.id
       @redemption.discount_applied = params[:discount]
+      @user.points -= params[:booking][:points_used]
 
     else 
       @booking.apply_discount = false
@@ -97,9 +103,36 @@ class BookingsController < ApplicationController
     @booking.aproval_status = "rejected"
     @booking.save
 
+    authorize @booking
+
     respond_to do |format|
-      format.json {render json: {status: "ok"}}
+      format.json {render json: {status: "ok", id: @booking.id}}
     end
+  end
+
+  def destroy
+    @booking = Booking.find(params[:id])
+    @booking.destroy
+
+    redirect_to dashboard_path
+
+    authorize @booking
+  end
+
+  def cancel
+    @booking = Booking.find(params[:booking_id])
+
+    authorize @booking
+  end
+
+  def cancelconfirm
+    @booking = Booking.find(params[:booking_id])
+    @booking.aproval_status = "cancel"
+    @booking.cancel_reason = params[:booking][:cancel_reason]
+    @booking.save
+
+    redirect_to dashboard_path
+    flash[:alert] = "Booking has been cancelled"
 
     authorize @booking
   end

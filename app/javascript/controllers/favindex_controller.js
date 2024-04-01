@@ -12,7 +12,6 @@ export default class extends Controller {
     e.preventDefault();
 
     const url = `/listings/${this.idValue}/addfavorites`
-    console.log(this.carddeleteTarget)
 
     fetch(url, {
       method: 'GET', 
@@ -28,6 +27,7 @@ export default class extends Controller {
         this.carddeleteTarget.outerHTML = ""
         this.faviconTarget.innerHTML = `<i class="fa-regular fa-heart"></i>`
         this.faviconTarget.classList.value = 'favicon'
+        window.location.reload();
       }
     })
   }

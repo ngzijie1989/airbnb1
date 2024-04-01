@@ -37,6 +37,18 @@
       <p><%= @listing.state %>, <%= @listing.country %></p>
       <p><%= @listing.no_of_rooms %> rooms</p>
       <p><%= @listing.description %> rooms</p>
+      
+      <div class= "map-content mb-4">
+        <h3>Where you will be staying</h3>
+
+        <div class="map-image"
+        data-controller="map"
+        data-map-markers-value= "<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        
+        </div>
+      </div>
+
     </div>
 
     <div class="col-4">
