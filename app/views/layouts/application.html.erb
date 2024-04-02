@@ -21,7 +21,7 @@
   </head>
 
   <body>
-    <body data-controller="push" data-application-server-key="<%= Rails.application.credentials.vapid_public_key %>">
+    <%# <body data-controller="push" data-application-server-key="<%= Rails.application.credentials.vapid_public_key %>
     <%= render 'pages/navbar' %>
     <div class="mt-4 main-content">
       <%= yield %>
