@@ -63,7 +63,7 @@ class BookingsController < ApplicationController
     @notification.message_header = "Your listing at \"#{@listing.title}\" has been booked!"
     @notification.booking_id = @booking.id
     @notification.link ="/bookings/#{@booking.id}"
-    @notification.notification_type = "booking"
+    @notification.notification_type = "new booking"
     @notification.listing_id = @listing.id
 
     @notification.save
@@ -100,6 +100,17 @@ class BookingsController < ApplicationController
     @days = @booking.days_to_stay
     @user.approve_add_points(@days)
     @user.save
+    @listing = Listing.find(@booking.listing_id)
+
+    @notification = Notification.new
+    @notification.user_id = @booking.buyer_id
+    @notification.message_header = "Your booking at \"#{@listing.title}\" has been approved"
+    @notification.booking_id = @booking.id
+    @notification.link ="/bookings/#{@booking.id}"
+    @notification.notification_type = "approve booking"
+    @notification.listing_id = @listing.id
+
+    @notification.save
 
     respond_to do |format|
       format.json {render json: {status: "ok"}}
@@ -112,6 +123,18 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:booking_id])
     @booking.aproval_status = "rejected"
     @booking.save
+
+    @listing = Listing.find(@booking.listing_id)
+
+    @notification = Notification.new
+    @notification.user_id = @booking.buyer_id
+    @notification.message_header = "Your booking at \"#{@listing.title}\" has been rejected"
+    @notification.booking_id = @booking.id
+    @notification.link ="/bookings/#{@booking.id}"
+    @notification.notification_type = "reject booking"
+    @notification.listing_id = @listing.id
+
+    @notification.save
 
     authorize @booking
 

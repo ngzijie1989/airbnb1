@@ -56,6 +56,7 @@ gem "pg_search"
 gem 'country_select', '~> 8.0'
 gem 'simple_form_fancy_uploads'
 gem "geocoder"
+gem "webpush"
 
 group :development, :test do
   gem "dotenv-rails"

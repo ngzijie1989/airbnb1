@@ -1,7 +1,7 @@
 <div class="notification-index" data-controller="notifications">
   <% @notifications.each do |notification| %>
     <%= link_to notification_path(notification), class:"text-decoration-none text-dark", data: {action: "click->notifications#counter"} do %>
-      <div class="card p-3 notification-index-single">
+      <div class="card p-3 notification-index-single mb-3">
         <div class="d-flex justify-content-between">
           <div class="d-flex">
             <div>

@@ -5,11 +5,20 @@ class NotificationsController < ApplicationController
 
   def show
     @notification = Notification.find(params[:id])
-    @notification.read = true
-    @notification.save
+    @notification.update(read: true)
     @booking = Booking.find(@notification.booking_id)
 
-    redirect_to booking_review_path(@booking)
+    case @notification.notification_type
+    
+    when "new booking"
+      redirect_to booking_review_path(@booking)
+    
+    when "booking"
+      redirect_to booking_path(@booking)
+    else
+      redirect_to root_path
+      flash[:alert] = "Error"
+    end
 
     authorize @notification
   end
