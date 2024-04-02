@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :redemptions, dependent: :destroy
   has_many :bookings_as_buyer, class_name: 'Booking', foreign_key: 'buyer_id'
   has_many :bookings_as_lister, class_name: 'Booking', foreign_key: 'lister_id'
+  has_many :notifications, dependent: :destroy
 
   def approve_add_points(days)
     self.points += days * 500

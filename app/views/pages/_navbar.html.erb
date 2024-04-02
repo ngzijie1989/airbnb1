@@ -1,4 +1,4 @@
-<div class="bg-light p-4 navbar-settings">
+<div class="bg-light p-4 navbar-settings" data-controller="notifications" data-notifications-initial-value = "<%= Notification.all.where(user: current_user).where(read: false).count%>">
     <div class="d-flex justify-content-between">
       <div class="logo">
         <%= link_to listings_path do %>
@@ -36,7 +36,20 @@
           <%= link_to "Login", new_user_session_path, data: { turbo_method: :get }, class:"d-flex align-items-center text-black btn btn-light"%>
         <% end %>
 
-        <div>
+        <% if user_signed_in? %>
+          <div class="d-flex align-items-center me-4 parent-notification">
+            <%= link_to notifications_path, class:"text-dark fs-6" do %>
+              <span><i class="fa-solid fa-inbox"></i></span>
+              <div class="child-notification">
+                <% unless Notification.all.where(user: current_user).where(read: false).count == 0 %>
+                  <span class="notification-count" data-notifications-target="count"><%= Notification.all.where(user: current_user).where(read: false).count %></span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="">
           <%= link_to account_info_path do  %>
             <% if user_signed_in? %>
               <% @user = current_user %>

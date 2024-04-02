@@ -31,4 +31,8 @@ Rails.application.routes.draw do
   get "/account_info", to: "pages#account_info", as: "account_info"
   get "/dashboard", to: "pages#dashboard", as: "dashboard"
   resources :favorites, only: %i[index]
+
+  resources :notifications, only: %i[index show] do
+    patch "/softdelete", to: "notifications#softdelete", as: "softdelete"
+  end
 end

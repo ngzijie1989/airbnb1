@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_01_140537) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_02_043953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -105,6 +105,47 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_01_140537) do
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
+  create_table "noticed_events", force: :cascade do |t|
+    t.string "type"
+    t.string "record_type"
+    t.bigint "record_id"
+    t.jsonb "params"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "notifications_count"
+    t.index ["record_type", "record_id"], name: "index_noticed_events_on_record"
+  end
+
+  create_table "noticed_notifications", force: :cascade do |t|
+    t.string "type"
+    t.bigint "event_id", null: false
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.datetime "read_at", precision: nil
+    t.datetime "seen_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_noticed_notifications_on_event_id"
+    t.index ["recipient_type", "recipient_id"], name: "index_noticed_notifications_on_recipient"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "message"
+    t.boolean "read", default: false
+    t.boolean "soft_delete", default: false
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "message_header"
+    t.string "notification_type"
+    t.bigint "booking_id"
+    t.bigint "listing_id"
+    t.index ["booking_id"], name: "index_notifications_on_booking_id"
+    t.index ["listing_id"], name: "index_notifications_on_listing_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "redemptions", force: :cascade do |t|
     t.integer "points_redeemed"
     t.bigint "user_id", null: false
@@ -142,6 +183,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_01_140537) do
   add_foreign_key "favorites", "users"
   add_foreign_key "listings", "categories"
   add_foreign_key "listings", "users"
+  add_foreign_key "notifications", "bookings"
+  add_foreign_key "notifications", "listings"
+  add_foreign_key "notifications", "users"
   add_foreign_key "redemptions", "bookings"
   add_foreign_key "redemptions", "users"
 end

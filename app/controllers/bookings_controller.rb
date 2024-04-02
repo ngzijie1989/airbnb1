@@ -58,6 +58,16 @@ class BookingsController < ApplicationController
       @redemption.save
     end
 
+    @notification = Notification.new
+    @notification.user_id = @booking.lister_id
+    @notification.message_header = "Your listing at \"#{@listing.title}\" has been booked!"
+    @notification.booking_id = @booking.id
+    @notification.link ="/bookings/#{@booking.id}"
+    @notification.notification_type = "booking"
+    @notification.listing_id = @listing.id
+
+    @notification.save
+
     respond_to do |format|
       format.json 
     end
