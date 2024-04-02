@@ -45,7 +45,7 @@ class BookingsController < ApplicationController
       @redemption.points_redeemed = params[:booking][:points_used]
       @redemption.user_id = @user.id
       @redemption.discount_applied = params[:discount]
-      @user.points -= params[:booking][:points_used]
+      @user.points -= params[:booking][:points_used].to_i
 
     else 
       @booking.apply_discount = false
