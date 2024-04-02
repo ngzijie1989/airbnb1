@@ -8,12 +8,9 @@ class NotificationsController < ApplicationController
     @notification.update(read: true)
     @booking = Booking.find(@notification.booking_id)
 
-    case @notification.notification_type
-    
-    when "new booking"
+    if @notification.notification_type == "new booking"
       redirect_to booking_review_path(@booking)
-    
-    when "booking"
+    elsif "booking"
       redirect_to booking_path(@booking)
     else
       redirect_to root_path

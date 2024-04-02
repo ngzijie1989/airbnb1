@@ -6,7 +6,7 @@ class CreateBookings < ActiveRecord::Migration[7.1]
       t.references :listing, null: false, foreign_key: true
       t.string :aproval_status
       t.integer :no_of_guests
-      t.references :user, null: false, foreign_key: true, as 
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
