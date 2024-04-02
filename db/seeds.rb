@@ -11,6 +11,7 @@ require 'faker'
 #   end
 
 puts "deleting all entries"
+Notification.destroy_all
 Redemption.destroy_all
 Booking.destroy_all
 Favorite.destroy_all
