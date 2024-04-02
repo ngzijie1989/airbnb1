@@ -21,15 +21,10 @@
   </head>
 
   <body>
-    <%# <body data-controller="push" data-application-server-key="<%= Rails.application.credentials.vapid_public_key %>
     <%= render 'pages/navbar' %>
     <div class="mt-4 main-content">
       <%= yield %>
       <%= render "pages/flashes" %>
     </div>
   </body>
-  <script>
-    // const vapidPublicKey = "<%= Rails.application.credentials.vapid_public_key.delete('=') %>";  
-    // const vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(Rails.application.credentials.vapid_public_key).bytes %>);
-  </script>
 </html>
