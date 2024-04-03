@@ -18,6 +18,23 @@ class ListingsController < ApplicationController
     authorize @listing
   end
 
+  def edit
+    @listing = Listing.find(params[:id])
+
+    authorize @listing
+  end
+
+  def update
+    @listing = Listing.find(params[:id])
+    @listing.update(listing_params)
+    @listing.save
+
+    redirect_to dashboard_path
+    flash[:success] = "Listing has been edited"
+
+    authorize @listing
+  end
+
   def create
     @listing = Listing.new(listing_params)
     @listing.user_id = current_user.id

@@ -1,0 +1,22 @@
+<div class="container pb-3">
+  <h1>Edit Listing</h1>
+  <%= simple_form_for @listing, class:"form-setting" do |f| %>
+    <%= f.input :title, placeholder: 'Give your listing an interesting title!'%>
+    <%= f.input :subtitle %>
+    <%= f.input :description, placeholder: 'Please give a detailed description of your listing! (min 150 characters)' %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true }, label: "Images (Please submit at least 5 images)" %>
+    <%= f.input :country %>
+    <%= f.input :state %>
+    <%= f.input :address,
+    wrapper_html: {data: {controller: "autocomplete" ,autocomplete_key_value: ENV["MAPBOX_API_KEY"]}},
+    input_html: {data: {autocomplete_target: "location"}, class:"d-none"} %>
+    <%= f.input :no_of_rooms, collection: (1..5) %>
+    <%= f.input :category_id, collection: Category.pluck(:name, :id), label:"Type of home" %>
+    <div class="d-flex justify-content-between">
+    <%= f.input :price_per_night, input_html: { min: 0 }, label: "Accomodation per night (in SGD)" %>
+    <%= f.input :service_fee_per_night, input_html: { min: 0 }, label: "Service Fee per night (in SGD)" %>
+    <%= f.input :cleaning_fee_per_night, input_html: { min: 0 }, label: "Cleaning Fee per night (in SGD)" %>
+    </div>
+    <%= f.button :submit, class:"btn btn-primary w-100", value: "Edit Listing"%>
+  <% end %>
+</div>
