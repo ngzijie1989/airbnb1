@@ -5,7 +5,7 @@ class FavoritePolicy < ApplicationPolicy
     #   scope.all
     # end
     def resolve
-      scope.includes(:listing).where(user_id: user)
+      scope.where(user_id: user)
     end
   end
 end

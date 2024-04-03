@@ -5,9 +5,11 @@ class BookingPolicy < ApplicationPolicy
     #   scope.all
     # end
 
-    def resolve
-      scope.where(buyer_id: @user.id)
+    def resolve 
+      scope.includes(listing: { photos_attachments: :blob }).includes(:lister).where(buyer_id: @user.id)
     end
+
+    # .includes(photos_attachments: :blob)
   end
 
   def new?

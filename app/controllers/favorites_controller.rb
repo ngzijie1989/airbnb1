@@ -3,6 +3,6 @@ class FavoritesController < ApplicationController
   def index
     @favorites = policy_scope(Favorite)
     @fav_ids = @favorites.map do |fav| fav.listing_id end
-    @listings = Listing.where(id: @fav_ids)
+    @listings = Listing.where(id: @fav_ids).includes(photos_attachments: :blob)
   end
 end

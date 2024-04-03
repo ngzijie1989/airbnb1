@@ -16,7 +16,7 @@
       <% end %>
     </div>
     
-    <div data-content="pending" class="content-pendingbookings d-none" data-dashboard-target="contentToggle">
+    <div data-content="pending" class="content-dashboard d-none" data-dashboard-target="contentToggle">
       <% if @pending_bookings.count == 0 %>
         <p><em>You do not have any bookings to be approved</em></p>
       <% else %>
@@ -24,7 +24,7 @@
       <% end %>
     </div>
     
-    <div data-content="approved" class="content-approvedbookings d-none" data-dashboard-target="contentToggle">
+    <div data-content="approved" class="content-dashboard d-none" data-dashboard-target="contentToggle">
       <% if @approved_bookings.count == 0 %>
         <p><em>You do not have any approved bookings yet</em></p>
       <% else %>

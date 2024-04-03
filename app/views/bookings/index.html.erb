@@ -5,8 +5,6 @@
 <div class="grid-container">
   <% carousel_id = 0 %>
     <% @bookings.each do |booking| %>
-      <% @lister = User.find(booking.lister_id) %>
-      <% @listing = Listing.find(booking.listing.id) %>
       <% if booking.aproval_status == 'pending' || booking.aproval_status == 'approved' %>
         <%= link_to booking_path(booking), class:"text-decoration-none" do%>
           <div class="booking-card">
@@ -23,8 +21,8 @@
 
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <% if @listing.photos.attached? %>
-                    <%= cl_image_tag @listing.photos[0].key, class:"booking-image" %>
+                  <% if booking.listing.photos.attached? %>
+                    <%= cl_image_tag booking.listing.photos[0].key, class:"booking-image" %>
                   <% else %>
                     <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"booking-image" %>
                   <% end %>
@@ -54,9 +52,9 @@
               <p> Payment Type: <%= booking.payment %> </p>
               <div class="d-flex justify-content-between">
                 <span>Total Price <strong>$<%= booking.total_fee %></strong> SGD</span>
-                <span><%= @lister.username %>
-                  <% if @lister.photo.attached? %>
-                    <%= cl_image_tag @lister.photo.key, height: 300, width: 400, crop: :fill, class:"avatar-small" %>
+                <span><%= booking.lister.username %>
+                  <% if booking.lister.photo.attached? %>
+                    <%= cl_image_tag booking.lister.photo.key, height: 300, width: 400, crop: :fill, class:"avatar-small" %>
                   <% else %>
                     <%= image_tag "poster boy.jpg", alt: "user", width: 150, class:"avatar-small" %>
                   <% end %>
@@ -81,8 +79,6 @@
   <div class="grid-container">
     <% carousel_id = 0 %>
       <% @bookings.each do |booking| %>
-        <% @lister = User.find(booking.lister_id) %>
-        <% @listing = Listing.find(booking.listing.id) %>
         <% if booking.aproval_status == 'rejected'%>
           <%= link_to booking_path(booking), class:"text-decoration-none" do%>
             <div class="booking-card">
@@ -99,8 +95,8 @@
 
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <% if @listing.photos.attached? %>
-                      <%= cl_image_tag @listing.photos[0].key, class:"booking-image" %>
+                    <% if booking.listing.photos.attached? %>
+                      <%= cl_image_tag booking.listing.photos[0].key, class:"booking-image" %>
                     <% else %>
                       <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"booking-image" %>
                     <% end %>
@@ -130,10 +126,10 @@
                 <% days = (booking.end_date - booking.start_date).to_i %>
 
                 <div class="d-flex justify-content-between">
-                  <span>Total Price <strong>$<%= @listing.price_per_night*days %></strong> SGD</span>
-                  <span><%= @lister.username %>
-                    <% if @lister.photo.attached? %>
-                      <%= cl_image_tag @lister.photo.key, height: 300, width: 400, crop: :fill, class:"avatar" %>
+                  <span>Total Price <strong>$<%= booking.listing.price_per_night*days %></strong> SGD</span>
+                  <span><%= booking.lister.username %>
+                    <% if booking.lister.photo.attached? %>
+                      <%= cl_image_tag booking.lister.photo.key, height: 300, width: 400, crop: :fill, class:"avatar" %>
                     <% else %>
                       <%= image_tag "poster boy.jpg", alt: "user", width: 150, class:"avatar" %>
                     <% end %>

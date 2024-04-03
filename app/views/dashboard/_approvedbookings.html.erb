@@ -2,10 +2,9 @@
   <% approved_bookings.each do |booking| %>
     <div class="card listing-index-card">
       <div class="d-flex">
-      <% @listing = Listing.find(booking.listing.id) %>
         <div>
-          <% if @listing.photos.attached? %>
-            <%= cl_image_tag @listing.photos[0].key, class:"listing-index-image" %>
+          <% if booking.listing.photos.attached? %>
+            <%= cl_image_tag booking.listing.photos[0].key, class:"listing-index-image" %>
           <% else %>
             <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"listing-index-image" %>
           <% end %>
