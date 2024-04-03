@@ -7,6 +7,7 @@ I did a mock airbnb on my own and implemented the following:
 4) Redemption using an 'airbnb points' system
 5) API calls using mapbox to show map
 6) Favorites
+7) Resolve all N+1 queries
 
 What i did not do but hope to do:
 1) Reviews

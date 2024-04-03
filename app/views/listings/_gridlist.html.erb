@@ -66,24 +66,29 @@
           </button>
 
         </div>
-        <div class="listing-content">
-          <p><%= listing.state %>, <%= listing.country%></p>
-          <p>Listed by <strong><%= User.find(listing.user_id).name %></strong></p>
-          <p><strong>$<%=listing.price_per_night%></strong> SGD per night</p>
+        <div class="listing-content d-flex flex-column">
+
+          <div class="flex-grow-1">
+            <p><%= listing.state %>, <%= listing.country%></p>
+            <p><strong>$<%=listing.price_per_night%></strong> SGD per night</p>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <p>Listed by <strong><%= User.find(listing.user_id).name %></strong></p>
+          </div>
+
           <% if user_signed_in? %>
-          <% @user_id = current_user.id %>
-          <% else %>
-          <% @user_id = "" %>
-          <% end %>
-          <% fav_check = @favorites.find_by(listing_id: listing.id, user_id: @user_id) %>
-          <% unless fav_check.nil? %>
-            <div>
-              <span class="faviconred" data-action="click->fav#fire" data-fav-target="favicon"><i class="fa-solid fa-heart"></i></span>
-            </div>
-          <% else %>
-            <div>
-              <span class="favicon"  data-action="click->fav#fire" data-fav-target="favicon"><i class="fa-regular fa-heart"></i></span>
-            </div>
+            <% @user_id = current_user.id %>
+            <% fav_check = @favorites.find_by(listing_id: listing.id, user_id: @user_id) %>
+              <% unless fav_check.nil? %>
+                <div>
+                  <span class="faviconred" data-action="click->fav#fire" data-fav-target="favicon"><i class="fa-solid fa-heart"></i></span>
+                </div>
+              <% else %>
+                <div>
+                  <span class="favicon"  data-action="click->fav#fire" data-fav-target="favicon"><i class="fa-regular fa-heart"></i></span>
+                </div>
+              <% end %>
           <% end %>
 
         </div>
