@@ -3,7 +3,7 @@ Hi all, i am an aspiring developer who just graduated from a boot camp.
 I did a mock airbnb on my own and implemented the following:
 1) Bookings with new bookings, approvals, rejects and cancellation. 
 2) Notification feature
-3) Listings (CRUD)
+3) Listings (CRUD) [Listing information are all made up. Some are using the Faker Gem]
 4) Redemption using an 'airbnb points' system
 5) API calls using mapbox to show map
 6) Favorites feature
