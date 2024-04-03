@@ -19,13 +19,16 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data.status)
-      if (data.status == true) {
+      if (data.status === true) {
         this.faviconTarget.innerHTML = `<i class="fa-solid fa-heart"></i>`
         this.faviconTarget.classList.value = 'faviconred'
-      } else {
+      } else if (data.status === false ) {
         this.faviconTarget.innerHTML = `<i class="fa-regular fa-heart"></i>`
         this.faviconTarget.classList.value = 'favicon'
+      } else if (data.status === "unauthorized" ) {
+        window.location.replace("/users/sign_in")
+        alert(data.error)
+
       }
     })
   }
