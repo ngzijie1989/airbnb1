@@ -11,9 +11,10 @@
   <div class="row">
     <div data-controller="datepicker" 
     data-datepicker-id-value= "<%= @listing.id %>"
+    data-datepicker-dates-value= "<%= @dates.to_json %>"
     class="col-7 card p-2 mb-3">
       <div data-datepicker-target="render">
-        <%= render "newbooking", listing: @listing, booking: @booking, user: @user %>
+        <%= render "newbooking", listing: @listing, booking: @booking, user: @user, dates: @dates %>
       </div>
 
       <div class="row mt-3">

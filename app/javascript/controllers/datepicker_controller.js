@@ -24,14 +24,16 @@ export default class extends Controller {
   ];
 
   static values = {
-    id: Number
+    id: Number,
+    dates: Array
   }
 
   connect() {
-    this.startDateChange = flatpickr( this.startDateTarget, { minDate: "today" } );
-    this.endDateChange = flatpickr( this.endDateTarget, { minDate: this.getNextDay(new Date())} );
+    this.startDateChange = flatpickr( this.startDateTarget, { minDate: "today", dateFormat: "Y-m-d", disable: this.datesValue} );
+    this.endDateChange = flatpickr( this.endDateTarget, { minDate: this.getNextDay(new Date()) , dateFormat: "Y-m-d", disable: this.datesValue} );
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    console.log(this.datesValue)
   }
 
   update(){

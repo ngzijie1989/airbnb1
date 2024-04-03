@@ -8,6 +8,8 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     @listing = Listing.find(params[:listing_id])
     @user = current_user
+    @listing_bookings = @listing.bookings.where(aproval_status: ["pending", "approved"])
+    @dates = @listing_bookings.map { |booking| { from: booking.start_date, to: booking.end_date } }
 
     @markers = [{ lat: @listing.latitude,
     lng: @listing.longitude}]
