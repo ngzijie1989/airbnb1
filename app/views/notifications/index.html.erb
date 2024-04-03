@@ -4,7 +4,7 @@
   <% else %>
     <% @notifications.each do |notification| %>
       <%= link_to notification_path(notification), class:"text-decoration-none text-dark", data: {action: "click->notifications#counter"} do %>
-        <div class="card p-3 notification-index-single mb-3">
+        <div class="card p-3 notification-index-single mb-3 <%= "bg-dark-subtle" if notification.read == true %> ">
           <div class="d-flex justify-content-between">
             <div class="d-flex">
               <div>
@@ -16,8 +16,10 @@
               </div>
 
               <div class="d-flex justify-content-center flex-column ms-4 text-decoration-none">
+                <p class="m-0"><b>
+                <%= notification.notification_header(notification.notification_type) %>
+                </b></p>
                 <p class="m-0"><%= notification.message_header %></p>
-                <p class="m-0"><b>Review Booking</b></p>
               </div>
             </div>
 

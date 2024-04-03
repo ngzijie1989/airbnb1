@@ -18,8 +18,12 @@
     </div>
 
     <div class="d-flex" data-controller="bookingstatus" data-bookingstatus-id-value = "<%= @booking.id%>">
-      <%=link_to "Approve", booking_approve_path(@booking), class:"btn btn-success w-100 m-3", data: { action: "click->bookingstatus#approve" } %>
-      <%=link_to "Reject", booking_reject_path(@booking), class:"btn btn-secondary w-100 m-3", data: { action: "click->bookingstatus#reject" }  %>
+      <% if @booking.aproval_status == "pending" %>
+        <%=link_to "Approve", booking_approve_path(@booking), class:"btn btn-success w-100 m-3", data: { action: "click->bookingstatus#approve" } %>
+        <%=link_to "Reject", booking_reject_path(@booking), class:"btn btn-secondary w-100 m-3", data: { action: "click->bookingstatus#reject" }  %>
+      <% else %>
+        <p class="mt-3"> Your booking has been <b><%= @booking.aproval_status %></b> </p>
+      <% end %>
     </div>
   </div>
 
