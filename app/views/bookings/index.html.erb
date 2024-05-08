@@ -24,7 +24,7 @@
                   <% if booking.listing.photos.attached? %>
                     <%= cl_image_tag booking.listing.photos[0].key, class:"booking-image" %>
                   <% else %>
-                    <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"booking-image" %>
+                    <%= image_tag "https://source.unsplash.com/random?apartment", alt: "apartment", width: 150, class:"booking-image" %>
                   <% end %>
                 </div>
 
@@ -54,7 +54,7 @@
                 <span>Total Price <strong>$<%= booking.total_fee %></strong> SGD</span>
                 <span><%= booking.lister.username %>
                   <% if booking.lister.photo.attached? %>
-                    <%= cl_image_tag booking.lister.photo.key, height: 300, width: 400, crop: :fill, class:"avatar-small" %>
+                    <%= cl_image_tag booking.lister.photo.key, height: 40, width: 40, crop: :fill, class:"avatar-small" %>
                   <% else %>
                     <%= image_tag "poster boy.jpg", alt: "user", width: 150, class:"avatar-small" %>
                   <% end %>
@@ -98,7 +98,7 @@
                     <% if booking.listing.photos.attached? %>
                       <%= cl_image_tag booking.listing.photos[0].key, class:"booking-image" %>
                     <% else %>
-                      <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"booking-image" %>
+                      <%= image_tag "https://source.unsplash.com/random?apartment", alt: "apartment", width: 150, class:"booking-image" %>
                     <% end %>
                   </div>
 
@@ -129,7 +129,7 @@
                   <span>Total Price <strong>$<%= booking.listing.price_per_night*days %></strong> SGD</span>
                   <span><%= booking.lister.username %>
                     <% if booking.lister.photo.attached? %>
-                      <%= cl_image_tag booking.lister.photo.key, height: 300, width: 400, crop: :fill, class:"avatar" %>
+                      <%= cl_image_tag booking.lister.photo.key, height: 40, width: 40, crop: :fill, class:"avatar" %>
                     <% else %>
                       <%= image_tag "poster boy.jpg", alt: "user", width: 150, class:"avatar" %>
                     <% end %>

@@ -8,7 +8,7 @@
               <% if notification.listing && notification.listing.photos.attached? %>
                 <%= cl_image_tag notification.listing.photos[0].key, class:"notification-image" %>
               <% else %>
-                <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"notification-image" %>
+                <%= image_tag "https://source.unsplash.com/random?apartment", alt: "apartment", width: 150, class:"notification-image" %>
               <% end %>
             </div>
 

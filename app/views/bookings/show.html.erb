@@ -12,7 +12,7 @@
           <p> Start Date: <%= start_date %> </p>
           <p> Your host: <%= @user.name %> 
             <% if @user.photo.attached? %>
-              <%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill, class:"avatar-small" %>
+              <%= cl_image_tag @user.photo.key, height: 40, width: 40, crop: :fill, class:"avatar-small" %>
             <% else %>
               <%= image_tag "poster boy.jpg", alt: "user", width: 150, class:"avatar-small" %>
             <% end %>
@@ -49,7 +49,7 @@
       <% if @listing.photos.attached? %>
         <%= cl_image_tag @listing.photos[0].key, class:"booking-image-show" %>
       <% else %>
-        <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"booking-image-show" %>
+        <%= image_tag "https://source.unsplash.com/random?apartment", alt: "apartment", width: 150, class:"booking-image-show" %>
       <% end %>
 
       <%=link_to "View listing", booking_view_listing_path(@booking, @listing), class:"btn btn-primary w-100 mt-2" %>

@@ -2,7 +2,7 @@
   <div class="row border p-4">
     <div class="col-6 d-flex justify-content-center align-items-center">
       <% if @user.photo.attached? %>
-        <%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill, class:"avatar-large" %>
+        <%= cl_image_tag @user.photo.key, height: 40, width: 40, crop: :fill, class:"avatar-large" %>
       <% else %>
         <%= image_tag "poster boy.jpg", alt: "user", width: 150, class:"avatar-large" %>
       <% end %>
