@@ -1,4 +1,5 @@
 require 'faker'
+require 'open-uri'
 
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
@@ -20,10 +21,26 @@ Category.destroy_all
 User.destroy_all
 
 puts "creating entries"
-user1 = User.create!(email: "user1@hotmail.com", username: "user1", password: "123456", bio: "Nice to meet you", name: "user1zi")
-user2 = User.create!(email: "user2@hotmail.com", username: "user2", password: "123456", bio: "Nice to meet you!!", name: "user2zi")
-user3 = User.create!(email: "user3@hotmail.com", username: "user3", password: "123456", bio: "bangawan solo", name: "user3zi")
-user4 = User.create!(email: "user4@hotmail.com", username: "user4", password: "123456", bio: "Nice to meet you!!", name: "user4zi")
+user1 = User.create!(email: "user1@hotmail.com", username: "Zi Jie", password: "123456", bio: "Nice to meet you", name: "Zi Jie")
+user2 = User.create!(email: "user2@hotmail.com", username: "Charlie Soh", password: "123456", bio: "Nice to meet you!!", name: "Charlie Soh")
+user3 = User.create!(email: "user3@hotmail.com", username: "Jeremy Bannar", password: "123456", bio: "bangawan solo", name: "Jeremy Bannar")
+user4 = User.create!(email: "user4@hotmail.com", username: "Magnus Mitbo", password: "123456", bio: "Nice to meet you!!", name: "Magnus Mitbo")
+
+file1 = URI.open("https://thispersondoesnotexist.com/")
+user1.photo.attach(io: file1, filename: "avatar1.jpeg", content_type: "image/jpeg")
+user1.save
+
+file2 = URI.open("https://thispersondoesnotexist.com/")
+user2.photo.attach(io: file2, filename: "avatar1.jpeg", content_type: "image/jpeg")
+user2.save
+
+file3 = URI.open("https://thispersondoesnotexist.com/")
+user3.photo.attach(io: file3, filename: "avatar1.jpeg", content_type: "image/jpeg")
+user3.save
+
+file4 = URI.open("https://thispersondoesnotexist.com/")
+user4.photo.attach(io: file4, filename: "avatar1.jpeg", content_type: "image/jpeg")
+user4.save
 
 cat1 = Category.create!(name: "HDB")
 cat2 = Category.create!(name: "Condo")
@@ -38,10 +55,7 @@ Listing.create!(country: Faker::Address.country,
                 state: Faker::Address.city, 
                 no_of_rooms: rand(1..5), 
                 description: 
-                "Discover the perfect blend of comfort and style in our spacious Airbnb apartment. Located in the heart of the city, 
-                this cozy retreat offers modern amenities, breathtaking views, and easy access to top attractions. Unwind in the luxurious
-                 living space, savor gourmet meals in the fully-equipped kitchen, and recharge in the serene bedroom. Your ideal urban getaway
-                  awaits!",
+                Faker::Lorem.paragraph_by_chars(number: 250, supplemental: false),
                 category_id: cat_array.sample.id, 
                 price_per_night: 150, 
                 address: Faker::Address.full_address, 

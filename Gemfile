@@ -58,6 +58,7 @@ gem 'simple_form_fancy_uploads'
 gem "geocoder"
 gem "web-push"
 gem "faker"
+gem "unsplash_image" 
 
 group :development, :test do
   gem "dotenv-rails"
