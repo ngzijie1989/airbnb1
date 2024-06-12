@@ -24,7 +24,7 @@
                   <% if booking.listing.photos.attached? %>
                     <%= cl_image_tag booking.listing.photos[0].key, class:"booking-image" %>
                   <% else %>
-                    <%= image_tag "https://source.unsplash.com/random?apartment", alt: "apartment", width: 150, class:"booking-image" %>
+                    <%= image_tag "studio#{rand(1..11)}.jpeg", alt: "apartment", width: 150, class:"booking-image" %>
                   <% end %>
                 </div>
 
@@ -98,7 +98,7 @@
                     <% if booking.listing.photos.attached? %>
                       <%= cl_image_tag booking.listing.photos[0].key, class:"booking-image" %>
                     <% else %>
-                      <%= image_tag "https://source.unsplash.com/random?apartment", alt: "apartment", width: 150, class:"booking-image" %>
+                      <%= image_tag "studio#{rand(1..11)}.jpeg", alt: "apartment", width: 150, class:"booking-image" %>
                     <% end %>
                   </div>
 

@@ -17,7 +17,7 @@
               <% if listing.photos.attached? %>
                 <%= cl_image_tag listing.photos[0].key, class:"listing-image" %>
               <% else %>
-                <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+                <%= image_tag "studio#{rand(1..11)}.jpeg", alt: "apartment", width: 150, class:"listing-image" %>
               <% end %>
             </div>
 
@@ -25,7 +25,7 @@
               <% if listing.photos.attached? %>
                 <%= cl_image_tag listing.photos[1].key, class:"listing-image" %>
               <% else %>
-                <%= image_tag "apartment2.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+                <%= image_tag "studio#{rand(1..11)}.jpeg", alt: "apartment", width: 150, class:"listing-image" %>
               <% end %>
             </div>
 
@@ -33,7 +33,7 @@
               <% if listing.photos.attached? %>
                 <%= cl_image_tag listing.photos[2].key, class:"listing-image" %>
               <% else %>
-                <%= image_tag "apartment3.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+                <%= image_tag "studio#{rand(1..11)}.jpeg", alt: "apartment", width: 150, class:"listing-image" %>
               <% end %>
             </div>
 
@@ -41,7 +41,7 @@
               <% if listing.photos.attached? %>
                 <%= cl_image_tag listing.photos[3].key, class:"listing-image" %>
               <% else %>
-                <%= image_tag "apartment.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+                <%= image_tag "studio#{rand(1..11)}.jpeg", alt: "apartment", width: 150, class:"listing-image" %>
               <% end %>
             </div>
 
@@ -49,7 +49,7 @@
               <% if listing.photos.attached? %>
                 <%= cl_image_tag listing.photos[4].key, class:"listing-image" %>
               <% else %>
-                <%= image_tag "apartment2.jpg", alt: "apartment", width: 150, class:"listing-image" %>
+                <%= image_tag "studio#{rand(1..11)}.jpeg", alt: "apartment", width: 150, class:"listing-image" %>
               <% end %>
             </div>
 
